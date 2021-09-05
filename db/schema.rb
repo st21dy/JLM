@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2021_09_05_074806) do
     t.datetime "remember_created_at"
     t.string "name"
     t.string "icon_id"
+    t.text "body"
     t.boolean "is_active", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -6,4 +6,8 @@ class User < ApplicationRecord
          
   has_many :articles, dependent: :destroy
   attachment :icon
+  
+  validates :body, presence: false, length: { maximum: 50 } 
+  # 自己紹介の最高文字数は50文字
+  
 end

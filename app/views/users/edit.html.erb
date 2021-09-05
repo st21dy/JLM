@@ -1,13 +1,28 @@
+<center>
+
 <h2>プロフィール編集</h2>
 
 <%= form_with model:@user, local:true do |f| %>
   <%= attachment_image_tag @user, :icon, :fill, 60, 60, fallback: "no_image.jpg" %>
-  <label for="inputImage">プロフィール写真</label>
+  
+  <br><br>
+  
+  <label for="inputImage">プロフィール写真</label><br>
   <%= f.attachment_field :icon, placeholder: "プロフィール画像" %>
   
-  <label for="inputName">名前</label>
+  <br><br>
+  
+  <label for="inputName">名前</label><br>
   <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前" %>
+  
+  <br><br>
+  
+  <label for="inputBody">自己紹介</label><br>
+  <%= f.text_field :body, autofocus: true, id:"inputBody" %>
+  
+  <br><br>
   
   <%= f.submit "変更を保存" %>
 <% end %>
 
+</center>
