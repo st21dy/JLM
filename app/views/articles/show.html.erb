@@ -1,0 +1,21 @@
+<center>
+
+<div>
+  <%= @article.user.name %>
+</div>
+
+<div>
+  <%= attachment_image_tag @article, :image %>
+  <br>
+  <%= @article.title %>
+  <br>
+  <%= @article.body %>
+  <br>
+  <%= @article.created_at.strftime('%Y/%m/%d') %>
+  
+  <% if @article.user == current_user %>
+    <%= link_to "削除",article_path(@article), method: :delete %>
+  <% end %>
+</div>  
+
+</center>

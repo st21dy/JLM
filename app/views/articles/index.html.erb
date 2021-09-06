@@ -1,0 +1,21 @@
+<center>
+
+<% @articles.each do |article| %>
+
+<div>
+  <%= article.user.name %>
+</div>
+
+<div>
+  <%= attachment_image_tag article, :image %>
+  <br>
+  <%= link_to article_path(article.id) do %>
+    <%= article.title %>
+  <% end %>
+  <br>
+  <%= article.body %>
+</div>
+
+<% end %>
+
+</center>
