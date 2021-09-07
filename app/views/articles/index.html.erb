@@ -7,7 +7,15 @@
 </div>
 
 <div>
-  <%= attachment_image_tag article, :image %>
+  <!-- 動画と画像で表示を分ける-->
+  <% if article.video? %>
+     <% type = file_type(article.video.url)%> <!-- app/helpers/application_helper.rbにfile_typeを定義 -->
+     <% if type == 'image' %>
+         <%= image_tag article.video.url, :size => "300x300" %>
+     <% elsif type == 'video' %>
+         <%= video_tag article.video.url, autoplay: true, muted: true, controls: true, :size => "300x300" %>
+     <% end %>
+  <% end %>
   <br>
   <%= link_to article_path(article.id) do %>
     <%= article.title %>

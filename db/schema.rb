@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 2021_09_05_074806) do
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.string "image_id"
+    t.string "video"
     t.text "body"
     t.integer "user_id"
     t.datetime "created_at", null: false

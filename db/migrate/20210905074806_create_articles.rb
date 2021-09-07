@@ -3,6 +3,7 @@ class CreateArticles < ActiveRecord::Migration[5.2]
     create_table :articles do |t|
       t.string :title
       t.string :image_id
+      t.string :video
       t.text :body
       t.integer :user_id
 
