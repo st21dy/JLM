@@ -1,7 +1,7 @@
 <h1>画像投稿フォーム</h1>
 <%= form_with model: @article, local:true do |f| %>
 
-  <%= f.file_field :video, :accept => 'video/*,image/jpeg,image/gif,image/png' %>
+  <%= f.file_field :video, :accept => 'video/*,image/jpeg,image/gif,image/png,image/' %>
   
   <h4>タイトル</h4>
   <%= f.text_field :title %>

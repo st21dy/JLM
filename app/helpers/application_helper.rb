@@ -6,6 +6,7 @@ module ApplicationHelper
          :jpg => "image",
          :gif => "image",
          :png => "image",
+         :JPG => "image",
          :mp4 => "video", 
          :mkv => "video",
          :MOV => "video"
