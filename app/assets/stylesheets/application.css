@@ -16,6 +16,30 @@
 
 /*******************************************全体***************************************************/
 
-a{
+a
+{
   text-decoration: none;
 }
+
+
+/*******************************************article***************************************************/
+
+#article
+{
+  padding: 50px 50px;
+  background-color: #fff;
+  box-shadow: 0 0 20px 7px rgba(0,0,0,0.2);
+  
+}
+
+#article .icon
+{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-left: -20px;
+  margin-top: -30px;
+  margin-bottom: 30px;
+  
+}
+

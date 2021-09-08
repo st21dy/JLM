@@ -29,6 +29,18 @@ class ArticlesController < ApplicationController
     redirect_to articles_path
 
   end
+  
+  def edit
+    @article = Article.find(params[:id])
+    
+  end
+  
+  def update
+    article = Article.find(params[:id])
+    article.update(article_params)
+    redirect_to articles_path
+    
+  end
 
   private
 

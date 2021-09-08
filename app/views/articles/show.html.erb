@@ -1,11 +1,16 @@
 <center>
 
-<div>
-  <%= attachment_image_tag @article.user, :icon, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg" %>
+<section id="article">
+
+<div class="container">
+<div class="row">
+  
+<div class="col-md-4">
+  <%= attachment_image_tag @article.user, :icon, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg", class:"icon" %>
   <%= @article.user.name %>
 </div>
 
-<div>
+<div class="img">
   <% if @article.video? %>
      <% type = file_type(@article.video.url)%>
      <% if type == 'image' %>
@@ -23,7 +28,8 @@
   <%= @article.created_at.strftime('%Y/%m/%d') %>
 
   <% if @article.user == current_user %>
-    <%= link_to("削除",article_path(@article), method: :delete, class:"underline") %>
+    <%= link_to "削除",article_path(@article), method: :delete %>
+    <%= link_to "編集", edit_article_path(@article) %>
   <% end %>
 
   <!-- いいね機能 -->
@@ -41,5 +47,10 @@
     </p>
   <% end %>
 </div>
+
+</div>
+</div>
+
+</section>
 
 </center>
