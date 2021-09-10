@@ -13,9 +13,9 @@
   <% if article.video? %>
      <% type = file_type(article.video.url)%> <!-- app/helpers/application_helper.rbにfile_typeを定義 -->
      <% if type == 'image' %>
-         <%= image_tag article.video.url, :size => "300x300" %>
+        <%= image_tag article.video.url, :size => "300x300" %>
      <% elsif type == 'video' %>
-         <%= video_tag article.video.url, autoplay: true, muted: true, controls: true, :size => "300x300" %>
+        <%= video_tag article.video.url, autoplay: true, muted: true, controls: true, :size => "300x300" %>
      <% end %>
   <% end %>
   <% end %>
