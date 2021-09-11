@@ -5,14 +5,19 @@ Rails.application.routes.draw do
   root to: 'homes#top'
   
   resources :users, only: [:show, :edit, :update] do
+    
+    member do
+      get :follows, :followers, :likes
+    end
     resource :follows, only: [:create, :destroy]
-    get 'followings' => 'follows#followings', as: 'followings'
-  get 'followers' => 'follows#followers', as: 'followers'
+    
   end
   
   
   resources :articles do
+    
     resource :likes, only: [:create, :destroy]
+    
   end
   
   

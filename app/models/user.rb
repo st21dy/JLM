@@ -13,24 +13,25 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   # dependent: :destroyでデータが削除された場合関連して削除されるよう設定(Userのデータが削除された時、そのUserが投稿したいいねデータも一緒に削除される)
   
+  has_many :follower, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
+  has_many :followed, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy
+  has_many :following_user, through: :follower, source: :followed # 自分がフォローしている人
+  has_many :follower_user, through: :followed, source: :follower # 自分をフォローしている人
   
-  has_many :reverse_of_follows, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy
-  has_many :followers, through: :reverse_of_follows, source: :follower
-  # 被フォロー関係を通じて参照→followed_idをフォローしている人
-
-  has_many :follows, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
-  # 【class_name: "Follow"】は省略可能
-  has_many :followings, through: :follows, source: :followed
-  # 与フォロー関係を通じて参照→follower_idをフォローしている人
-  
+  # ユーザーをフォローする
   def follow(user_id)
-    follows.create(followed_id: user_id)
+    follower.create(followed_id: user_id)
   end
+
+  # ユーザーのフォローを外す
   def unfollow(user_id)
-    follows.find_by(followed_id: user_id).destroy
+    follower.find_by(followed_id: user_id).destroy
   end
+
+  # フォローしていればtrueを返す
   def following?(user)
-    followings.include?(user)
+    following_user.include?(user)
   end
+  
   
 end
