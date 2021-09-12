@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:likes]
 
   def show
     @user = User.find(params[:id])
@@ -22,17 +21,34 @@ class UsersController < ApplicationController
 
   def follows
     user = User.find(params[:id])
-    @users = user.following_user.page(params[:page]).per(3).reverse_order
+    @users = user.following_user.page(params[:page]).reverse_order
+    
   end
 
   def followers
     user = User.find(params[:id])
-    @users = user.follower_user.page(params[:page]).per(3).reverse_order
+    @users = user.follower_user.page(params[:page]).reverse_order
+    
   end
   
   def likes
-    likes = Like.where(user_id: @user.id).pluck(:article_id)
-    @like_articles = Article.find(likes)
+    @User = User.find_by(id: params[:id])
+    @likes = Like.where(user_id: @user_id)
+    
+  end
+  
+  def unsubscribe
+    
+  end
+  
+  def withdraw
+    @user = current_user
+    @user.update(is_deleted: true)
+    
+    reset_session
+    flash[:notice] = "ありがとうございました。またのご利用お待ちしております。"
+    redirect_to root_path
+    
   end
   
 
@@ -40,10 +56,6 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :icon, :body)
-  end
-  
-  def set_user
-    @user = User.find(params[:id])
   end
 
 

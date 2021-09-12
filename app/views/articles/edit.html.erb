@@ -29,6 +29,9 @@
     
     <h4>説明</h4>
     <%= f.text_area :body %>
+    
+    <h4>スペースを入力することで複数のタグを付けることができます。</h4>
+    <%= f.text_field :tag_name %>
     <br>
     <%= f.submit '編集' %>
   <% end %>

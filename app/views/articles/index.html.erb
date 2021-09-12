@@ -1,4 +1,12 @@
 <center>
+<div>
+  <p>
+    タグ一覧:
+    <% @tag_list.each do |list| %>
+      <%= link_to list.tag_name, tag_articles_path(tag_id: list.id) %>
+    <% end %>
+  </p>
+</div>
 
 <% @articles.each do |article| %>
 
@@ -38,6 +46,10 @@
       <% end %>
     </p>
   <% end %>
+  
+  <p>
+    コメント数<%= article.article_comments.count %>
+  </p>
 </div>
 
 <% end %>
