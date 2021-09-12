@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:likes]
 
   def show
     @user = User.find(params[:id])
@@ -32,8 +33,8 @@ class UsersController < ApplicationController
   end
   
   def likes
-    @User = User.find_by(id: params[:id])
-    @likes = Like.where(user_id: @user_id)
+    likes = Like.where(user_id: @user.id).pluck(:article_id)
+    @like_articles = Article.find(likes)
     
   end
   
@@ -56,6 +57,10 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :icon, :body)
+  end
+  
+  def set_user
+    @user = User.find(params[:id])
   end
 
 

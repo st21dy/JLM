@@ -42,7 +42,9 @@
 </div>
 
 <div>
-  <%= link_to "いいね投稿一覧", likes_user_path(@user) %>
+  <% if @user.id == current_user.id %>
+    <%= link_to "いいね投稿一覧", likes_user_path(@user) %>
+  <% end %>
 </div>
 
 <section id="article">
