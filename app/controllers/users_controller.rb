@@ -20,19 +20,19 @@ class UsersController < ApplicationController
 
   end
 
-  def follows
+  def follows # フォロー
     user = User.find(params[:id])
     @users = user.following_user.page(params[:page]).reverse_order
     
   end
 
-  def followers
+  def followers # フォロワー
     user = User.find(params[:id])
     @users = user.follower_user.page(params[:page]).reverse_order
     
   end
   
-  def likes
+  def likes # 
     likes = Like.where(user_id: @user.id).pluck(:article_id)
     @like_articles = Article.find(likes)
     
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
     
   end
   
-  def withdraw
+  def withdraw # 退会機能
     @user = current_user
     @user.update(is_deleted: true)
     

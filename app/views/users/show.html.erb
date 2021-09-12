@@ -30,6 +30,7 @@
   <% if @user.id == current_user.id %>
     <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
   <% end %>
+  <!--ログインしているユーザーのみ表示-->
 </div>
 
 <div>
@@ -45,6 +46,7 @@
   <% if @user.id == current_user.id %>
     <%= link_to "いいね投稿一覧", likes_user_path(@user) %>
   <% end %>
+  <!--ログインしているユーザーのみ表示-->
 </div>
 
 <section id="article">
