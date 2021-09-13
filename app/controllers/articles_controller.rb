@@ -10,10 +10,6 @@ class ArticlesController < ApplicationController
     @article.user_id = current_user.id
     @article.save
     redirect_to articles_path
-    tag_list = params[:article][:tag_name].split(",")
-    if @article.save
-      @article.save_tag(tag_list)
-    end
 
   end
 
@@ -24,8 +20,6 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
-    @article_tags = @article.tags
-    #そのクリックした投稿に紐付けられているタグの取得。
     @user = User.find(@article.user_id)
     @article_comment = ArticleComment.new
 
@@ -51,12 +45,8 @@ class ArticlesController < ApplicationController
   end
   
   def search
-    @tag_list = Tag.all
-    #こっちの投稿一覧表示ページでも全てのタグを表示するために、タグを全取得
-    @tag = Tag.find(params[:tag_id])
-    #クリックしたタグを取得
-    @articles = @tag.articles.all
-    #クリックしたタグに紐付けられた投稿を全て表示
+    @articles = Article.search(params[:keyword])
+    @keyword = params[:keyword]
 
   end
 
@@ -64,7 +54,7 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:title, :body, :video)
+    params.require(:article).permit(:title, :body, :video, :tag)
   end
 
 end

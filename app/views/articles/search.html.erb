@@ -1,15 +1,15 @@
 <div>
-<% @tag_list.each do |list| %>
-    <%= link_to list.tag_name, tag_articles_path(tag_id: list.id) %>
-    <%= list.articles.count %>
-<% end %>
-<!--タグ一覧-->
+  <%= form_with url: search_articles_path, method: :get, local: true do |f| %>
+    <%= f.text_field :keyword, value: @keyword %>
+    <%= f.submit "検索" %>
+  <% end %>
 </div>
 
+
 <div>
-  <p>
-    <%= @tag.tag_name %>の投稿一覧
-  </p>
+  <% if @keyword == nil %>
+    検索
+  <% elsif %>
   
   <% @articles.each do |article| %>
 
@@ -31,9 +31,6 @@
     <% end %>
     <% end %>
     <br>
-    <%= article.title %>
-    <br>
-    <%= article.body %>
   
     <!-- いいね機能 -->
     <% if article.liked_by?(current_user) %>
@@ -49,11 +46,12 @@
         <% end %>
       </p>
     <% end %>
-  
-    <p>
-      コメント数<%= article.article_comments.count %>
-    </p>
   </div>
 
   <% end %>
+  <% end %>
+</div>
+
+<div>
+  <%= link_to "戻る", articles_path %>
 </div>

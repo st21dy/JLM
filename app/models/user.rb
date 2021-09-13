@@ -9,10 +9,6 @@ class User < ApplicationRecord
   
   has_many :article_comments, dependent: :destroy
   
-  has_many :tag_maps, dependent: :destroy
-  has_many :tags, through: :tag_maps
-  # throughオプションによって、tag_mapsテーブルを通してtagsテーブルとの関連付けを行っている。こうすることで、Article.tagsとすればArticleに紐付けられたTagの取得が可能になる。これは投稿詳細画面などでその投稿に付けられているタグを取得して表示させるなどの際に使える。
-  
   validates :body, presence: false, length: { maximum: 50 } 
   # 自己紹介の最高文字数は50文字
   

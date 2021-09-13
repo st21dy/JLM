@@ -23,13 +23,13 @@ Rails.application.routes.draw do
 
     resource :likes, only: [:create, :destroy]
     resource :article_comments, only: [:create, :destroy]
+    collection do
+      get 'search'
+    end
 
   end
 
-  resources :tags do
-    get 'articles', to: 'articles#search'
-    #タグによって絞り込んだ投稿を表示するアクションへのルーティング
-  end
+  resources :tags
 
 
 end
