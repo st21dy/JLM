@@ -22,14 +22,14 @@
   <% end %>
 
   <br>
-  <%= @article.title %>
+    <%= @article.title %>
   <br>
-  <%= @article.body %>
+    <%= @article.body %>
   <br>
-  <% @article_tags.each do |tag| %>
-    <%= link_to tag.tag_name, tag_articles_path(tag_id: tag.id) %>
-  <% end %>
-  <!--特定の投稿に対して紐付けられたタグ-->
+    <% @article_tags.each do |tag| %>
+      <%= link_to tag.tag_name, tag_articles_path(tag_id: tag.id) %>
+    <% end %>
+    <!--特定の投稿に対して紐付けられたタグ-->
   <br>
   <%= @article.created_at.strftime('%Y/%m/%d') %>
 

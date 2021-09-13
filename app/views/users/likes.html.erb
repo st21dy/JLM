@@ -19,10 +19,6 @@
      <% end %>
   <% end %>
   <% end %>
-  <br>
-    <%= article.title %>
-  <br>
-  <%= article.body %>
   
   <!-- いいね機能 -->
   <% if article.liked_by?(current_user) %>
@@ -39,9 +35,6 @@
     </p>
   <% end %>
   
-  <p>
-    コメント数<%= article.article_comments.count %>
-  </p>
 </div>
 
 <% end %>

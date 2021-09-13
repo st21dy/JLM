@@ -1,12 +1,4 @@
 <center>
-<div>
-  <p>
-    タグ一覧:
-    <% @tag_list.each do |list| %>
-      <%= link_to list.tag_name, tag_articles_path(tag_id: list.id) %>
-    <% end %>
-  </p>
-</div>
 
 <% @articles.each do |article| %>
 
@@ -27,11 +19,7 @@
      <% end %>
   <% end %>
   <% end %>
-  <br>
-    <%= article.title %>
-  <br>
-  <%= article.body %>
-  
+
   <!-- いいね機能 -->
   <% if article.liked_by?(current_user) %>
     <p>
@@ -47,9 +35,7 @@
     </p>
   <% end %>
   
-  <p>
-    コメント数<%= article.article_comments.count %>
-  </p>
+
 </div>
 
 <% end %>

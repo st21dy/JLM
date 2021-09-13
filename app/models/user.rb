@@ -44,5 +44,14 @@ class User < ApplicationRecord
     super && (self.is_deleted == false)
   end
   
+  def self.search(keyword)
+    if keyword
+      User.where(['name LIKE ?', "%#{keyword}%"])
+    else
+      User.all
+    end
+      
+  end
+  
   
 end

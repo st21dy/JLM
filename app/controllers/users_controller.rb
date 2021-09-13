@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     
   end
   
-  def likes # 
+  def likes # いいねした投稿
     likes = Like.where(user_id: @user.id).pluck(:article_id)
     @like_articles = Article.find(likes)
     
@@ -50,6 +50,12 @@ class UsersController < ApplicationController
     flash[:notice] = "ありがとうございました。またのご利用お待ちしております。"
     redirect_to root_path
     
+  end
+  
+  def search
+    @users = User.search(params[:keyword])
+    @keyword = params[:keyword]
+    render search_users_path
   end
   
 

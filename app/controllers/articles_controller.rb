@@ -19,8 +19,6 @@ class ArticlesController < ApplicationController
 
   def index
     @articles = Article.page(params[:page]).reverse_order
-    @tag_list = Tag.all
-    #ビューでタグ一覧を表示するために全取得。
 
   end
 
@@ -51,7 +49,7 @@ class ArticlesController < ApplicationController
     redirect_to articles_path
 
   end
-
+  
   def search
     @tag_list = Tag.all
     #こっちの投稿一覧表示ページでも全てのタグを表示するために、タグを全取得
@@ -68,6 +66,5 @@ class ArticlesController < ApplicationController
   def article_params
     params.require(:article).permit(:title, :body, :video)
   end
-
 
 end
