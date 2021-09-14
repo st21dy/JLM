@@ -1,16 +1,19 @@
-<div>
-  <%= form_with url: search_articles_path, method: :get, local: true do |f| %>
-    <%= f.text_field :keyword, value: @keyword %>
-    <%= f.submit "検索" %>
-  <% end %>
-</div>
+<!--検索-->
+<section>
+  <div>
+    <%= form_with url: search_articles_path, method: :get, local: true do |f| %>
+      <%= f.text_field :keyword, value: @keyword %>
+      <%= f.submit "検索" %>
+    <% end %>
+  </div>
+</section>
 
 
 <div>
   <% if @keyword == nil %>
     検索
   <% elsif %>
-  
+
   <% @articles.each do |article| %>
 
   <div>
@@ -31,7 +34,7 @@
     <% end %>
     <% end %>
     <br>
-  
+
     <!-- いいね機能 -->
     <% if article.liked_by?(current_user) %>
       <p>

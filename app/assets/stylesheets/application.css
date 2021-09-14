@@ -16,10 +16,84 @@
 
 /*******************************************全体***************************************************/
 
-a
+
+body
 {
+  margin: 0;
+  padding: 0;
+  background-image: url(IMG_0564.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+
+
+/*******************************************header***************************************************/
+
+header
+{
+  width: auto;
+  height: 100px;
+  margin: 0 auto;
+}
+
+.logo
+{
+  float: left;
+  margin-top: 20px;
+  margin-left: 50px
+}
+
+.logo-size
+{
+  width: 50px;
+  height: 50px;
+}
+
+.global-nav
+{
+  float: right;
+  margin-top: 50px;
+}
+
+.global-nav li
+{
+  float: left;
+  margin: 0 20px;
+  font-size: 20px;
+  list-style: none;
+}
+
+.global-nav li a
+{
+  color: #ffffff;
+  padding-bottom: 3px;
   text-decoration: none;
 }
+
+.global-nav li a:hover
+{
+  border-bottom: 2px solid #fff;
+}
+
+/*******************************************footer***************************************************/
+
+footer
+{
+  text-align: center;
+  color: #ffffff;
+  padding: 20px 0;
+}
+
+footer small
+{
+  font-size: 12px;
+}
+
+/*******************************************top***************************************************/
+
 
 
 /*******************************************article***************************************************/
