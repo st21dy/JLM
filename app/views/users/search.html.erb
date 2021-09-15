@@ -1,20 +1,28 @@
-<div>
-  <%= form_with url: search_users_path, method: :get, local: true do |f| %>
-    <%= f.text_field :keyword, value: @keyword %>
-    <%= f.submit "検索" %>
-  <% end %>
-</div>
-
-<div>
-  <% if @keyword == nil %>
-    検索
-  <% elsif %>
-    <% @users.each do |user| %>
-      <%= link_to user.name, user_path(user.id) %>
-    <% end %>
-  <% end %>
-</div>
-
-<div>
-  <%= link_to "戻る", user_path(current_user.id) %>
+<div id="usersearch">
+  <section>
+    
+    <div class="text-center">
+      <%= form_with url: search_users_path, method: :get, local: true do |f| %>
+        <%= f.text_field :keyword, value: @keyword, placeholder: "User Name" %>
+        
+        <%= f.submit "検索" %>
+      <% end %>
+    </div>
+    
+    <div class="search">
+      <div class="d-flex flex-column bd-highlight mb-3 text-center">
+        <% if @keyword == nil %>
+        
+        <% elsif %>
+          <% @users.each do |user| %>
+            <h3>
+              <%= link_to user.name, user_path(user.id), class: "line" %>
+            </h3>
+            
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    
+  </section>
 </div>

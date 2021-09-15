@@ -1,20 +1,21 @@
-<div>
-  <div class="container">
-    <div class="row justify-content-center">
-      <h1>フォロワー一覧</h1>
-    </div>
-    <div>
-      <% @users.each do |user| %>
-      <div>
+<div id="followers">
+  <section>
+    
+    <header class="text-center">
+      <h3>FOLLOWERS</h3>
+    </header>
+    
+    <% @users.each do |user| %>
+      <div class="article d-flex flex-column bd-highlight mb-3 text-center">
         <%= link_to user_path(user) do %>
-        <p><%= user.name %></p>
-        <div>
-          <%= attachment_image_tag @user, :icon, size: '50x50', fallback: "no_image.jpg", class: "mb-3 mt-3 ml-3 profile-img" %>
-        </div>
+          
+          <%= attachment_image_tag @user, :icon, size: '50x50', fallback: "no_image.jpg", class: "border border-dark rounded-circle" %>
+          
+          <%= user.name %>
+          
         <% end %>
       </div>
-      <% end %>
-    </div>
-    <%= paginate @users %>
-  </div>
+    <% end %>
+    
+  </section>
 </div>

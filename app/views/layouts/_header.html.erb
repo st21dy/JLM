@@ -1,42 +1,47 @@
-<header>
-  
-  <div class="logo">
-    <%= link_to root_path do %>
-      <%= image_tag 'logo.jpg', class: 'logo-size' %>
-    <% end %>
-  </div>
-  
-  <nav>
-    <ul class="global-nav">
-      <% if user_signed_in? %>
-        <li>
-            <%= link_to "マイページ", user_path(current_user.id) %>
-        </li>
-        
-        <li>
-          <%= link_to "投稿フォーム", new_article_path %>
-        </li>
-        
-        <li>
-          <%= link_to "投稿一覧", articles_path %>
-        </li>
-        
-        <li>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to "新規登録", new_user_registration_path %>
-        </li>
-        
-        <li>
-          <%= link_to "ログイン", new_user_session_path %>
-        </li>
-      <% end %>
-    </ul>
-  </nav>
-  
+<!-- Header -->
+<header id="header">
+		<div>
 
+			<!-- Navigation -->
+			<nav class="navbar navbar-light bg-light sticky-top">
+			  <div class="container-fluid">
+			    <!-- Logo -->
+			    <div class="navbar-brand">
+			      <%= link_to root_path, class: "logo" do %>
+			    	  <%= image_tag 'logo.jpg', class: "icon"  %>
+			      <% end %>
+			    </div>
+			    <!-- Nav -->
+			    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-expanded="false" aria-controls="navbar">
+			      <span class="navbar-toggler-icon"></span>
+			    </button>
+			    <div class="collapse navbar-collapse" id="navbarResponsive">
+			      <ul class="navbar-nav ml-auto">
+			        <% if user_signed_in? %>
+			          <li class="nav-item active">
+			            <%= link_to "MyPage", user_path(current_user.id), class: "nav-link" %>
+			          </li>
+			          <li class="nav-item active">
+			            <%= link_to "NewPost", new_article_path, class: "nav-link" %>
+			          </li>
+			          <li class="nav-item active">
+			            <%= link_to "AllPost", articles_path, class: "nav-link" %>
+			          </li>
+			          <li class="nav-item active">
+			            <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link" %>
+			          </li>
+		          <% else %>
+			          <li class="nav-item active">
+			            <%= link_to "新規登録", new_user_registration_path, class: "nav-link" %>
+			          </li>
+			          <li class="nav-item active">
+			            <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
+			          </li>
+			         <% end %>
+			      </ul>
+			    </div>
+			  </div>
+			</nav>
+
+		</div>
 </header>
-
-

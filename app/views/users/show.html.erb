@@ -1,102 +1,100 @@
-<center>
+<div id="mypage">
+  <div class="main">
+    <article class="profile">
 
-<div>
-  <%= attachment_image_tag @user, :icon, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
-</div>
+      <header>
+        <div class="text-center">
+          <%= attachment_image_tag @user, :icon, :fill, 200, 200, format: 'jpeg', fallback: "no_image.jpg", class: "border border-dark rounded-circle" %>
+        </div>
+        <h1 class="name text-center">
+          <strong><%= @user.name %></strong>
+        </h1>
+        <p class="body text-center">
+          <%= @user.body %>
+        </p>
+        <ul class="nav justify-content-center">
+          <li class="nav-item shadow">
+            <%= link_to follows_user_path(@user), class: "nav-link" do %>
+              フォロー<%= @following_users.count %>
+            <% end %>
+          </li>
+          <li class="nav-item shadow">
+            <%= link_to followers_user_path(@user), class: "nav-link" do %>
+              フォロワー<%= @follower_users.count %>
+            <% end %>
+          </li>
+          <li class="nav-item shadow">
+            <%= link_to "ユーザー検索", search_users_path, class: "nav-link" %>
+          </li>
+          <!--ログインしているユーザーのみ表示-->
+          <% if @user.id == current_user.id %>
+          <li class="nav-item shadow">
+            <%= link_to "いいね投稿一覧", likes_user_path(@user), class: "nav-link" %>
+          </li>
+          <li class="nav-item shadow">
+            <%= link_to "プロフィール編集", edit_user_path(@user), class: "nav-link" %>
+          </li>
+          <% end %>
+        </ul>
+        
+        <br>
+        
+        <div class="text-center">
+          <% if current_user != @user %>
+            <button type="button" class="btn btn-secondary text-center shadow">
+              <% if current_user.following?(@user) %>
+                <%= link_to 'フォロー外す', user_follows_path(@user.id), class: "follow",  method: :delete %>
+              <% else %>
+                <%= link_to 'フォローする', user_follows_path(@user.id), class: "follow", method: :POST %>
+              <% end %>
+            </button>
+          <% end %>
+        </div>
+      </header>
 
-<% if current_user != @user %>
-  <% if current_user.following?(@user) %>
-    <%= link_to 'フォロー外す', user_follows_path(@user.id), method: :delete %>
-  <% else %>
-    <%= link_to 'フォローする', user_follows_path(@user.id), method: :POST %>
-  <% end %>
-<% end %>
+    </article>
+  </div>
 
-<table>
-  <tbody>
-    <tr>
-      <td>名前</td>
-      <td><%= @user.name %></td>
-    </tr>
-
-    <tr>
-      <td>自己紹介</td>
-      <td><%= @user.body %></td>
-    </tr>
-  </tbody>
-</table>
-
-<div>
-  <% if @user.id == current_user.id %>
-    <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
-  <% end %>
-  <!--ログインしているユーザーのみ表示-->
-</div>
-
-<div>
-  <%= link_to follows_user_path(@user) do %>
-    <h6>フォロー<%= @following_users.count %></h6>
-  <% end %>
-  <%= link_to followers_user_path(@user) do %>
-    <h6>フォロワー<%= @follower_users.count %></h6>
-  <% end %>
-</div>
-
-<div>
-  <%= link_to "ユーザー検索", search_users_path %>
-</div>
-
-<div>
-  <% if @user.id == current_user.id %>
-    <%= link_to "いいね投稿一覧", likes_user_path(@user) %>
-  <% end %>
-  <!--ログインしているユーザーのみ表示-->
-</div>
-
-<section id="article">
-
-<div class="container">
-<div class="row">
-
-  <% @user.articles.each do |article| %>
-
-    <div>
-      <%= link_to article_path(article.id) do %>
-      <!-- 動画と画像で表示を分ける-->
-        <% if article.video? %>
-          <% type = file_type(article.video.url)%> <!-- app/helpers/application_helper.rbにfile_typeを定義 -->
-          <% if type == 'image' %>
-            <%= image_tag article.video.url, :size => "300x300" %>
-          <% elsif type == 'video' %>
-            <%= video_tag article.video.url, autoplay: true, muted: true, controls: true, :size => "300x300" %>
+  <div class="article">
+    <article class="d-flex flex-wrap justify-content-center">
+      <% @user.articles.each do |article| %>
+      <section class="border">
+        <%= link_to article_path(article.id) do %>
+          <!-- 動画と画像で表示を分ける-->
+          <% if article.video? %>
+            <% type = file_type(article.video.url)%> <!-- app/helpers/application_helper.rbにfile_typeを定義 -->
+              <% if type == 'image' %>
+                <%= image_tag article.video.url, :size => "300x300" %>
+              <% elsif type == 'video' %>
+                <%= video_tag article.video.url, autoplay: true, muted: true, controls: true, :size => "300x300" %>
+              <% end %>
           <% end %>
         <% end %>
-      <% end %>
-
-      <br>
-      <%= article.title %>
-      <br>
-      <%= article.body %>
-
-      <!-- いいね機能 -->
-      <% if article.liked_by?(current_user) %>
-        <p>
-          <%= link_to article_likes_path(article), method: :delete do %>
-           ❤️ いいね! <%= article.likes.count %>
-          <% end %>
+        
+        <h4 class="text-center">
+          <%= article.title %>
+        </h4>
+        
+        <!-- いいね機能 -->
+        <% if article.liked_by?(current_user) %>
+          <p class="text-center">
+            <%= link_to article_likes_path(article), class: "line", method: :delete do %>
+              ❤️ いいね! <%= article.likes.count %>
+            <% end %>
+          </p>
+        <% else %>
+          <p class="text-center">
+            <%= link_to article_likes_path(article), class: "line", method: :post do %>
+              ❤️ いいね! <%= article.likes.count %>
+            <% end %>
+          </p>
+        <% end %>
+        
+        <p class="text-center">
+          <%= link_to "DETAIL", article_path(article.id), class: "line" %>
         </p>
-      <% else %>
-        <p>
-          <%= link_to article_likes_path(article), method: :post do %>
-            ❤️ いいね! <%= article.likes.count %>
-          <% end %>
-        </p>
+      </section>
       <% end %>
-    </div>
-
-  <% end %>
+    </article>
+  </div>
 </div>
-</div>
-</div>
-
-</center>

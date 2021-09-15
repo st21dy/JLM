@@ -1,35 +1,39 @@
-<center>
-
-<h2>プロフィール編集</h2>
-
-<%= form_with model:@user, local:true do |f| %>
-  <%= attachment_image_tag @user, :icon, :fill, 60, 60, fallback: "no_image.jpg" %>
-  
-  <br><br>
-  
-  <label for="inputImage">プロフィール写真</label><br>
-  <%= f.attachment_field :icon, placeholder: "プロフィール画像" %>
-  
-  <br><br>
-  
-  <label for="inputName">名前</label><br>
-  <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前" %>
-  
-  <br><br>
-  
-  <label for="inputBody">自己紹介</label><br>
-  <%= f.text_field :body, autofocus: true, id:"inputBody" %>
-  
-  <br><br>
-  
-  <label for="inputEmail">メールアドレス</label><br>
-  <%= f.text_field :email, autofocus: true, id:"inputEmail" %>
-  
-  <br><br>
-  
-  <%= f.submit "変更を保存" %>
-  <%= link_to '退会する', unsubscribe_users_path %>
-  
-<% end %>
-
-</center>
+<div id="edit">
+  <div class="main">
+    <article class="profile">
+      
+      <header class="article text-center">
+        <h3>プロフィール編集</h3>
+      </header>
+      
+      <div class="article text-center">
+        <%= form_with model:@user, local:true do |f| %>
+        
+          <%= attachment_image_tag @user, :icon, :fill, 150, 150, fallback: "no_image.jpg", class: "border border-dark rounded-circle" %>
+          
+          <div class="form-group">
+            <label for="inputImage">プロフィール写真</label>
+            <br>
+            <%= f.attachment_field :icon, placeholder: "プロフィール画像" %>
+            <br>
+            <label for="inputName">名前</label>
+            <br>
+            <%= f.text_field :name, autofocus: true, id:"inputName", placeholder: "名前" %>
+            <br>
+            <label for="inputBody">自己紹介</label>
+            <br>
+            <%= f.text_field :body, autofocus: true, id:"inputBody", placeholder: "自己紹介" %>
+            <br>
+            <label for="inputEmail">メールアドレス</label>
+            <br>
+            <%= f.text_field :email, autofocus: true, id:"inputEmail", placeholder: "メールアドレス" %>
+          </div>
+          <%= f.submit "変更を保存" %>
+          <%= link_to '退会する', unsubscribe_users_path %>
+          
+        <% end %>
+      </div>
+      
+    </article>
+  </div>
+</div>

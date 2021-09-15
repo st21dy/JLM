@@ -43,4 +43,19 @@
 <% end %>
 
 <%= paginate @articles %>
+<footer class="paginate">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link" href="/articles" tabindex="-1">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="/articles">1</a></li>
+          <li class="page-item"><a class="page-link" href="/articles?page=2">2</a></li>
+          <li class="page-item"><a class="page-link" href="/articles?page=3">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="articles">Next</a>
+          </li>
+        </ul>
+      </nav>
+    </footer>
 </center>
