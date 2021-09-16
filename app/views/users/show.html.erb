@@ -13,25 +13,25 @@
           <%= @user.body %>
         </p>
         <ul class="nav justify-content-center">
-          <li class="nav-item shadow">
+          <li class="nav-item shadow border">
             <%= link_to follows_user_path(@user), class: "nav-link" do %>
               フォロー<%= @following_users.count %>
             <% end %>
           </li>
-          <li class="nav-item shadow">
+          <li class="nav-item shadow border">
             <%= link_to followers_user_path(@user), class: "nav-link" do %>
               フォロワー<%= @follower_users.count %>
             <% end %>
           </li>
-          <li class="nav-item shadow">
+          <li class="nav-item shadow border">
             <%= link_to "ユーザー検索", search_users_path, class: "nav-link" %>
           </li>
           <!--ログインしているユーザーのみ表示-->
           <% if @user.id == current_user.id %>
-          <li class="nav-item shadow">
+          <li class="nav-item shadow border">
             <%= link_to "いいね投稿一覧", likes_user_path(@user), class: "nav-link" %>
           </li>
-          <li class="nav-item shadow">
+          <li class="nav-item shadow border">
             <%= link_to "プロフィール編集", edit_user_path(@user), class: "nav-link" %>
           </li>
           <% end %>

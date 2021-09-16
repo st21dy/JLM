@@ -1,75 +1,88 @@
-<center>
-
-<section id="article">
-
-<div class="container">
-<div class="row">
-  
-<div class="col-md-4">
-  <%= attachment_image_tag @user, :icon, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg", class:"icon" %>
-  <%= link_to @user.name, user_path(@user.id) %>
-  <!--投稿者の詳細ページへのリンク-->
-</div>
-
-<div class="img">
-  <% if @article.video? %>
-     <% type = file_type(@article.video.url)%>
-     <% if type == 'image' %>
-         <%= image_tag @article.video.url, :size => "300x300" %>
-     <% elsif type == 'video' %>
-         <%= video_tag @article.video.url, autoplay: true, muted: true, controls: true, :size => "300x300" %>
-     <% end %>
-  <% end %>
-
-  <br>
-    <%= @article.title %>
-  <br>
-    <%= @article.body %>
-  <br>
-    <%= @article.tag %>
-  <br>
-  <%= @article.created_at.strftime('%Y/%m/%d') %>
-
-  <% if @article.user == current_user %>
-    <%= link_to "削除",article_path(@article), method: :delete %>
-    <%= link_to "編集", edit_article_path(@article) %>
-  <% end %>
-
-  <!-- いいね機能 -->
-  <% if @article.liked_by?(current_user) %>
-    <p>
-      <%= link_to article_likes_path(@article), method: :delete do %>
-        ❤️いいね!  <%= @article.likes.count %>
-      <% end %>
-    </p>
-  <% else %>
-    <p>
-      <%= link_to article_likes_path(@article), method: :post do %>
-        ❤️いいね!  <%= @article.likes.count %>
-      <% end %>
-    </p>
-  <% end %>
-  
-  <% @article.article_comments.each do |article_comment| %>
-    <%= article_comment.user.name %>
-    <%= article_comment.created_at.strftime('%Y/%m/%d') %><%= article_comment.comment %>
+<div id="articleshow">
+  <section>
     
-    <% if article_comment.user == current_user %>
-      <%= link_to "削除", article_article_comments_path(article_comment.article, article_comment), method: :delete %>
-    <% end %>
-  <% end %>
+    <header class="text-center">
+      <% if @article.user == current_user %>
+      <ul class="nav justify-content-center">
+        <li class="nav-item shadow border">
+          <%= link_to "編集", edit_article_path(@article), class: "nav-link" %>
+        </li>
+        <li class="nav-item shadow border">
+          <%= link_to "削除",article_path(@article), class: "nav-link", method: :delete %>
+        </li>
+      </ul>
+      <% end %>
+    </header>
+    
+    <div class="article">
+      <article class="d-flex flex-wrap justify-content-center">
+        <section class="box border">
+          <header class="icon">
+            <%= attachment_image_tag @user, :icon, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg", class: "border border-dark rounded-circle" %>
+            <%= link_to @user.name, user_path(@user.id), class: "line" %>
+            <!--投稿者の詳細ページへのリンク-->
+          </header>
+          
+          <!-- 動画と画像で表示を分ける-->
+          <% if @article.video? %>
+            <% type = file_type(@article.video.url)%> <!-- app/helpers/application_helper.rbにfile_typeを定義 -->
+              <% if type == 'image' %>
+                <%= image_tag @article.video.url, :size => "300x300" %>
+              <% elsif type == 'video' %>
+                <%= video_tag @article.video.url, autoplay: true, muted: true, controls: true, :size => "300x300" %>
+              <% end %>
+          <% end %>
+          
+          <small class="d-flex flex-nowrap">
+            <%= @article.created_at.strftime('%Y/%m/%d') %>
+          </small>
+          
+          <h4 class="text-center">
+            <%= @article.title %>
+          </h4>
+          
+          <h6 class="text-center">
+            <%= @article.body %>
+          </h6>
+          
+          <h6 class="text-center">
+            <%= @article.tag %>
+          </h6>
+          
+          <!-- いいね機能 -->
+          <% if @article.liked_by?(current_user) %>
+            <p class="text-center">
+              <%= link_to article_likes_path(@article), class: "line", method: :delete do %>
+                ❤️ いいね! <%= @article.likes.count %>
+              <% end %>
+            </p>
+          <% else %>
+            <p class="text-center">
+              <%= link_to article_likes_path(@article), class: "line", method: :post do %>
+                ❤️ いいね! <%= @article.likes.count %>
+              <% end %>
+            </p>
+          <% end %>
+          
+          <div>
+            <% @article.article_comments.each do |article_comment| %>
+              <%= article_comment.user.name %>
+              <%= article_comment.created_at.strftime('%Y/%m/%d') %><%= article_comment.comment %>
+    
+              <% if article_comment.user == current_user %>
+                <%= link_to "削除", article_article_comments_path(article_comment.article, article_comment), method: :delete %>
+              <% end %>
+            <% end %>
 
-  <%= form_with(model:[@article, @article_comment], local: true) do |f| %>
-    <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
-    <%= f.submit "送信する" %>
-  <% end %>
-  
-  <%= link_to "戻る", articles_path %>
+            <%= form_with(model:[@article, @article_comment], local: true) do |f| %>
+              <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+              <%= f.submit "送信する" %>
+            <% end %>
+          </div>
+        </section>
+      </article>
+    </div>
+    
+  </section>
 </div>
 
-</div>
-</div>
-
-</section>
-
-</center>

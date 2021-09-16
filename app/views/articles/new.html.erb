@@ -1,17 +1,38 @@
-<h1>画像投稿フォーム</h1>
-<%= form_with model: @article, local:true do |f| %>
+<div id="articlenew">
+  <div class="main">
+    <article>
+      
+      <header class="article text-center">
+        <h3>NEW POST</h3>
+      </header>
+      
+      <div class="article text-center">
+        <%= form_with model: @article, local:true do |f| %>
+        
+          <%= f.file_field :video, :accept => 'video/*,image/jpeg,image/gif,image/png,image/' %>
+          
+          <div class="form-group">
+            <label for="inputTitle">タイトル</label>
+            <br>
+            <%= f.text_field :title, placeholder: "タイトル" %>
+            <br>
+            <label for="inputBody">説明</label>
+            <br>
+            <%= f.text_area :body, placeholder: "説明" %>
+            <br>
+            <label for="inputTag">タグ</label>
+            <br>
+            <%= f.text_field :tag, placeholder: "タグ" %>
+          </div>
+          <%= f.submit '投稿' %>
+          
+        <% end %>
+      </div>
+      
+    </article>
+  </div>
+</div>
 
-  <%= f.file_field :video, :accept => 'video/*,image/jpeg,image/gif,image/png,image/' %>
-  
-  <h4>タイトル</h4>
-  <%= f.text_field :title %>
-  
-  <h4>説明</h4>
-  <%= f.text_area :body %>
-  
-  <h4>タグ</h4>
-  <%= f.text_field :tag %>
-  
-  <%= f.submit '投稿' %>
-  
-<% end %>
+
+
+

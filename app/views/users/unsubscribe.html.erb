@@ -1,15 +1,17 @@
-
-<div>
-  <h2>本当に退会しますか？</h2>
-  <div>
-    <h3>
+<div id="unsubscribe">
+  <section class="text-center">
+    <h3>本当に退会しますか？</h3>
+    <p>
       退会すると、会員登録情報や<br>
       これまでの投稿がなくなります。<br>
-      退会する場合は、「退会する」をクリックしてください。
-    </h3>
-  </div>
-  
-  <%= link_to "退会しない", users_path %>
-  <%= link_to "退会する", withdraw_users_path, method: :PATCH, data: {confirm: "本当に退会してもよろしいですか？"} %>
-  
+      退会する場合は、「<a class="line-red">退会する</a>」をクリックしてください。
+    </p>
+    <ul class="nav justify-content-center">
+      <li class="nav-item shadow border">
+        <%= link_to "退会しない", users_path, class: "line" %>
+      </li>
+      <li class="nav-item shadow border">
+         <%= link_to "退会する", withdraw_users_path, class: "line-red", method: :PATCH, data: {confirm: "本当に退会してもよろしいですか？"} %>
+      </li>
+  </section>
 </div>

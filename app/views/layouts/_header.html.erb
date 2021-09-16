@@ -1,6 +1,6 @@
 <!-- Header -->
 <header id="header">
-		<div>
+		<div class="fixed-top">
 
 			<!-- Navigation -->
 			<nav class="navbar navbar-light bg-light sticky-top">
@@ -16,25 +16,25 @@
 			      <span class="navbar-toggler-icon"></span>
 			    </button>
 			    <div class="collapse navbar-collapse" id="navbarResponsive">
-			      <ul class="navbar-nav ml-auto">
+			      <ul class="navbar-nav">
 			        <% if user_signed_in? %>
-			          <li class="nav-item active">
+			          <li class="nav-item">
 			            <%= link_to "MyPage", user_path(current_user.id), class: "nav-link" %>
 			          </li>
-			          <li class="nav-item active">
+			          <li class="nav-item">
 			            <%= link_to "NewPost", new_article_path, class: "nav-link" %>
 			          </li>
-			          <li class="nav-item active">
+			          <li class="nav-item">
 			            <%= link_to "AllPost", articles_path, class: "nav-link" %>
 			          </li>
-			          <li class="nav-item active">
+			          <li class="nav-item">
 			            <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link" %>
 			          </li>
 		          <% else %>
-			          <li class="nav-item active">
+			          <li class="nav-item">
 			            <%= link_to "新規登録", new_user_registration_path, class: "nav-link" %>
 			          </li>
-			          <li class="nav-item active">
+			          <li class="nav-item">
 			            <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
 			          </li>
 			         <% end %>

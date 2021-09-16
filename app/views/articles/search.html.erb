@@ -1,60 +1,65 @@
-<!--検索-->
-<section>
-  <div>
-    <%= form_with url: search_articles_path, method: :get, local: true do |f| %>
-      <%= f.text_field :keyword, value: @keyword %>
-      <%= f.submit "検索" %>
-    <% end %>
-  </div>
-</section>
-
-
-<div>
-  <% if @keyword == nil %>
-    検索
-  <% elsif %>
-
-  <% @articles.each do |article| %>
-
-  <div>
-    <%= attachment_image_tag article.user, :icon, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg" %>
-    <%= article.user.name %>
-  </div>
-
-  <div>
-    <%= link_to article_path(article.id) do %>
-    <!-- 動画と画像で表示を分ける-->
-    <% if article.video? %>
-       <% type = file_type(article.video.url)%> <!-- app/helpers/application_helper.rbにfile_typeを定義 -->
-       <% if type == 'image' %>
-          <%= image_tag article.video.url, :size => "300x300" %>
-       <% elsif type == 'video' %>
-          <%= video_tag article.video.url, autoplay: true, muted: true, controls: true, :size => "300x300" %>
-       <% end %>
-    <% end %>
-    <% end %>
-    <br>
-
-    <!-- いいね機能 -->
-    <% if article.liked_by?(current_user) %>
-      <p>
-        <%= link_to article_likes_path(article), method: :delete do %>
-          ❤️ いいね! <%= article.likes.count %>
+<div id="articlesearch">
+  <section>
+    
+    <div class="text-center">
+      <%= form_with url: search_articles_path, method: :get, local: true do |f| %>
+        <%= f.text_field :keyword, value: @keyword %>
+        <%= f.submit "検索" %>
+      <% end %>
+    </div>
+    
+    <div class="search">
+      <div class="d-flex flex-column bd-highlight mb-3 text-center">
+        <% if @keyword == nil %>
+          
+        <% elsif %>
+          
+          <article class="d-flex flex-wrap justify-content-center">
+            <% @articles.each do |article| %>
+              <section class="border">
+                <header class="icon">
+                  <%= attachment_image_tag article.user, :icon, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg", class: "border border-dark rounded-circle" %>
+                  <%= article.user.name %>
+                </header>
+                  
+                <%= link_to article_path(article.id) do %>
+                <!-- 動画と画像で表示を分ける-->
+                  <% if article.video? %>
+                    <% type = file_type(article.video.url)%> <!-- app/helpers/application_helper.rbにfile_typeを定義 -->
+                      <% if type == 'image' %>
+                        <%= image_tag article.video.url, :size => "300x300" %>
+                      <% elsif type == 'video' %>
+                        <%= video_tag article.video.url, autoplay: true, muted: true, controls: true, :size => "300x300" %>
+                      <% end %>
+                  <% end %>
+                <% end %>
+        
+                <h4 class="text-center">
+                  <%= article.title %>
+                </h4>
+          
+                <!-- いいね機能 -->
+                <% if article.liked_by?(current_user) %>
+                  <p class="text-center">
+                    <%= link_to article_likes_path(article), class: "line", method: :delete do %>
+                      ❤️ いいね! <%= article.likes.count %>
+                    <% end %>
+                  </p>
+                <% else %>
+                  <p class="text-center">
+                    <%= link_to article_likes_path(article), class: "line", method: :post do %>
+                      ❤️ いいね! <%= article.likes.count %>
+                    <% end %>
+                  </p>
+                <% end %>
+              </section>
+            <% end %>
+          </article>
+            
         <% end %>
-      </p>
-    <% else %>
-      <p>
-        <%= link_to article_likes_path(article), method: :post do %>
-          ❤️ いいね! <%= article.likes.count %>
-        <% end %>
-      </p>
-    <% end %>
-  </div>
-
-  <% end %>
-  <% end %>
+      </div>
+    </div>
+    
+  </section>
 </div>
 
-<div>
-  <%= link_to "戻る", articles_path %>
-</div>

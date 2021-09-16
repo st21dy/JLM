@@ -9,7 +9,7 @@
       <div class="article d-flex flex-column bd-highlight mb-3 text-center">
         <%= link_to user_path(user) do %>
           
-          <%= attachment_image_tag @users, :icon, size: '50x50', fallback: "no_image.jpg", class: "border border-dark rounded-circle" %>
+          <%= attachment_image_tag @user, :icon, size: '50x50', fallback: "no_image.jpg", class: "border border-dark rounded-circle" %>
           
           <%= user.name %>
           

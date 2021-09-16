@@ -1,48 +1,47 @@
-<center>
+<div id="articleedit">
+  <section>
 
-<section id="article">
+    <div class="article">
+      <article class="d-flex flex-wrap justify-content-center">
+        <section class="box border">
+          <header class="icon">
+            <%= attachment_image_tag @article.user, :icon, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg", class: "border border-dark rounded-circle" %>
+            <%= @article.user.name %>
+          </header>
 
-<h1>編集画面</h1>
+          <!-- 動画と画像で表示を分ける-->
+          <% if @article.video? %>
+            <% type = file_type(@article.video.url)%>
+              <% if type == 'image' %>
+                <%= image_tag @article.video.url, :size => "300x300" %>
+              <% elsif type == 'video' %>
+                <%= video_tag @article.video.url, autoplay: true, muted: true, controls: true, :size => "300x300" %>
+              <% end %>
+          <% end %>
 
+          <div class="articleedit text-center">
+            <%= form_with model:@article, local: true do |f| %>
 
-<div class="container">
-<div class="row">
-  
-<div class="col-md-4">
-  <%= attachment_image_tag @article.user, :icon, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg", class:"icon" %>
-  <%= @article.user.name %>
+              <div class="form-group">
+                <label for="inputTitle">タイトル</label>
+                <br>
+                <%= f.text_field :title, placeholder: "タイトル" %>
+                <br>
+                <label for="inputBody">説明</label>
+                <br>
+                <%= f.text_area :body, placeholder: "説明" %>
+                <br>
+                <label for="inputTag">タグ</label>
+                <br>
+                <%= f.text_field :tag, placeholder: "タグ" %>
+              </div>
+              <%= f.submit '編集' %>
+
+            <% end %>
+          </div>
+        </section>
+      </article>
+    </div>
+
+  </section>
 </div>
-
-<div class="img">
-  <% if @article.video? %>
-     <% type = file_type(@article.video.url)%>
-     <% if type == 'image' %>
-         <%= image_tag @article.video.url, :size => "300x300" %>
-     <% elsif type == 'video' %>
-         <%= video_tag @article.video.url, autoplay: true, muted: true, controls: true, :size => "300x300" %>
-     <% end %>
-  <% end %>
-  
-  <%= form_with model:@article, local: true do |f| %>
-    <h4>タイトル</h4>
-    <%= f.text_field :title %>
-    
-    <h4>説明</h4>
-    <%= f.text_area :body %>
-    
-    <h4>タグ</h4>
-    <%= f.text_field :tag %>
-    <br>
-    <%= f.submit '編集' %>
-  <% end %>
-  
-  <%= link_to "戻る", article_path(@article.id) %>
-</div>
-
-</div>
-</div>
-
-</section>
-
-</center>
-  
