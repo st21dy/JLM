@@ -17,7 +17,8 @@ Rails.application.routes.draw do
     resource :follows, only: [:create, :destroy]
 
   end
-
+  
+  
 
   resources :articles do
 
@@ -29,7 +30,7 @@ Rails.application.routes.draw do
 
   end
 
-  resources :tags
+  get '/article/hashtag/:name', to: "articles#hashtag"
 
 
 end

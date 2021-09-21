@@ -5,7 +5,7 @@ class CreateArticles < ActiveRecord::Migration[5.2]
       t.string :image_id
       t.string :video
       t.text :body
-      t.text :tag
+      t.text :caption
       t.integer :user_id
 
       t.timestamps

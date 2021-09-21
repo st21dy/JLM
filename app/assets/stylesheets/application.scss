@@ -105,7 +105,7 @@ body
 
 #mypage
 {
-  margin: 0 100px;
+  margin: 30px 100px;
   padding: 30px 30px;
   background-color: #ffffff;
 }
@@ -147,7 +147,7 @@ body
 
 #followers
 {
-  margin: 0 100px;
+  margin: 30px 100px;
   padding: 30px 30px;
   background-color: #ffffff;
 }
@@ -163,7 +163,7 @@ body
 
 #follows
 {
-  margin: 0 100px;
+  margin: 30px 100px;
   padding: 30px 30px;
   background-color: #ffffff;
 }
@@ -179,7 +179,7 @@ body
 
 #usersearch
 {
-  margin: 0 100px;
+  margin: 30px 100px;
   padding: 30px 30px;
   background-color: #ffffff;
 }
@@ -200,7 +200,7 @@ body
 
 #likes
 {
-  margin: 0 100px;
+  margin: 30px 100px;
   padding: 30px 30px;
   background-color: #ffffff;
 }
@@ -232,7 +232,7 @@ body
 
 #useredit
 {
-  margin: 0 100px;
+  margin: 30px 100px;
   padding: 30px 30px;
   background-color: #ffffff;
 }
@@ -253,7 +253,7 @@ body
 
 #unsubscribe
 {
-  margin: 0 100px;
+  margin: 30px 100px;
   padding: 30px 30px;
 }
 
@@ -284,7 +284,7 @@ body
 
 #articleindex
 {
-  margin: 0 100px;
+  margin: 30px 100px;
   padding: 30px 30px;
   background-color: #ffffff;
 }
@@ -321,7 +321,7 @@ body
 
 #articlesearch
 {
-  margin: 0 100px;
+  margin: 30px 100px;
   padding: 30px 30px;
   background-color: #ffffff;
 }
@@ -347,7 +347,7 @@ body
 
 #articlenew
 {
-  margin: 0 100px;
+  margin: 30px 100px;
   padding: 30px 30px;
   background-color: #ffffff;
 }
@@ -368,7 +368,7 @@ body
 
 #articleshow
 {
-  margin: 0 100px;
+  margin: 30px 100px;
   padding: 30px 30px;
   background-color: #ffffff;
 }
@@ -404,7 +404,7 @@ body
 
 #articleedit
 {
-  margin: 0 100px;
+  margin: 30px 100px;
   padding: 30px 30px;
   background-color: #ffffff;
 }
@@ -426,3 +426,39 @@ body
 
 /****/
 
+/** articles hashtag **/
+
+#articlehashtag
+{
+  margin: 30px 100px;
+  padding: 30px 30px;
+  background-color: #ffffff;
+}
+
+#articlehashtag .article
+{
+  margin: 30px 0;
+}
+
+#articlehashtag li
+{
+  list-style: none;
+  margin: 0 3px;
+}
+
+#articlehashtag .nav-link
+{
+  color: #000;
+}
+
+#articlehashtag .icon
+{
+  margin: 2px 2px;
+}
+
+#articlehashtag .line
+{
+  color: #000;
+}
+
+/****/

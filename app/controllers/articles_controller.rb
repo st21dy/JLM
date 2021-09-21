@@ -43,10 +43,17 @@ class ArticlesController < ApplicationController
     redirect_to articles_path
 
   end
-  
+
   def search
     @articles = Article.search(params[:keyword])
     @keyword = params[:keyword]
+
+  end
+
+  def hashtag
+    @user = current_user
+    @tag = Hashtag.find_by(hashname: params[:name])
+    @articles = @tag.articles
 
   end
 
@@ -54,7 +61,7 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:title, :body, :video, :tag)
+    params.require(:article).permit(:title, :body, :video, :caption, hashtag_ids: [])
   end
 
 end

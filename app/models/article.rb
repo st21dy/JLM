@@ -10,6 +10,9 @@ class Article < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :article_comments, dependent: :destroy
   
+  has_many :article_hashtag_relations
+  has_many :hashtags, through: :article_hashtag_relations
+  
   def liked_by?(user)
     likes.where(user_id: user.id).exists?
   end
@@ -18,11 +21,33 @@ class Article < ApplicationRecord
   
   def self.search(keyword)
     if keyword
-      Article.where(['title LIKE ? OR body LIKE ? OR tag LIKE ?', "%#{keyword}%", "%#{keyword}%", "%#{keyword}%"])
+      Article.where(['title LIKE ? OR caption LIKE ?', "%#{keyword}%", "%#{keyword}%"])
     else
       Article.all
     end
       
+  end
+  
+  #DBへのコミット直前に実施する
+  after_create do
+    article = Article.find_by(id: self.id)
+    hashtags  = self.caption.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
+    article.hashtags = []
+    hashtags.uniq.map do |hashtag|
+      #ハッシュタグは先頭の'#'を外した上で保存
+      tag = Hashtag.find_or_create_by(hashname: hashtag.downcase.delete('#'))
+      article.hashtags << tag
+    end
+  end
+
+  before_update do 
+    article = Article.find_by(id: self.id)
+    article.hashtags.clear
+    hashtags = self.caption.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
+    hashtags.uniq.map do |hashtag|
+      tag = Hashtag.find_or_create_by(hashname: hashtag.downcase.delete('#'))
+      article.hashtags << tag
+    end
   end
   
 end

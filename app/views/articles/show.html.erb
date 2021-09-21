@@ -46,7 +46,7 @@
           </h6>
           
           <h6 class="text-center">
-            <%= @article.tag %>
+            <%= render_with_hashtags(@article.caption) %>
           </h6>
           
           <!-- いいね機能 -->
