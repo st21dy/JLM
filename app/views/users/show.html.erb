@@ -1,8 +1,43 @@
-<div id="mypage">
+<div class="mx-sm-2 mx-md-3 mx-lg-5 pt-5 pb-5">
   <div class="main">
-    <article class="profile">
+    <article>
 
       <header>
+        <nav class="navbar navbar-light sticky-top">
+          <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarmypage" aria-expanded="false" aria-controls="navbar">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarmypage">
+              <ul class="nav justify-content-center">
+                <li class="nav-item shadow border m-1">
+                  <%= link_to follows_user_path(@user), class: "nav-link text-dark" do %>
+                    フォロー<%= @following_users.count %>
+                  <% end %>
+                </li>
+                <li class="nav-item shadow border m-1">
+                  <%= link_to followers_user_path(@user), class: "nav-link text-dark" do %>
+                    フォロワー<%= @follower_users.count %>
+                  <% end %>
+                </li>
+                <li class="nav-item shadow border m-1">
+                  <%= link_to "ユーザー検索", search_users_path, class: "nav-link text-dark" %>
+                </li>
+                <!--ログインしているユーザーのみ表示-->
+                <% if @user.id == current_user.id %>
+                  <li class="nav-item shadow border m-1">
+                    <%= link_to "いいね投稿一覧", likes_user_path(@user), class: "nav-link text-dark" %>
+                  </li>
+                  <li class="nav-item shadow border m-1">
+                    <%= link_to "プロフィール編集", edit_user_path(@user), class: "nav-link text-dark" %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        
         <div class="text-center">
           <%= attachment_image_tag @user, :icon, :fill, 200, 200, format: 'jpeg', fallback: "no_image.jpg", class: "border border-dark rounded-circle" %>
         </div>
@@ -12,40 +47,14 @@
         <p class="body text-center">
           <%= @user.body %>
         </p>
-        <ul class="nav justify-content-center">
-          <li class="nav-item shadow border">
-            <%= link_to follows_user_path(@user), class: "nav-link" do %>
-              フォロー<%= @following_users.count %>
-            <% end %>
-          </li>
-          <li class="nav-item shadow border">
-            <%= link_to followers_user_path(@user), class: "nav-link" do %>
-              フォロワー<%= @follower_users.count %>
-            <% end %>
-          </li>
-          <li class="nav-item shadow border">
-            <%= link_to "ユーザー検索", search_users_path, class: "nav-link" %>
-          </li>
-          <!--ログインしているユーザーのみ表示-->
-          <% if @user.id == current_user.id %>
-          <li class="nav-item shadow border">
-            <%= link_to "いいね投稿一覧", likes_user_path(@user), class: "nav-link" %>
-          </li>
-          <li class="nav-item shadow border">
-            <%= link_to "プロフィール編集", edit_user_path(@user), class: "nav-link" %>
-          </li>
-          <% end %>
-        </ul>
-        
-        <br>
         
         <div class="text-center">
           <% if current_user != @user %>
             <button type="button" class="btn btn-secondary text-center shadow">
               <% if current_user.following?(@user) %>
-                <%= link_to 'フォロー外す', user_follows_path(@user.id), class: "follow",  method: :delete %>
+                <%= link_to 'フォロー外す', user_follows_path(@user.id), class: "text-white", method: :delete %>
               <% else %>
-                <%= link_to 'フォローする', user_follows_path(@user.id), class: "follow", method: :POST %>
+                <%= link_to 'フォローする', user_follows_path(@user.id), class: "text-white", method: :POST %>
               <% end %>
             </button>
           <% end %>
@@ -55,10 +64,10 @@
     </article>
   </div>
 
-  <div class="article">
+  <div>
     <article class="d-flex flex-wrap justify-content-center">
       <% @user.articles.each do |article| %>
-      <section class="border">
+      <section class="border m-1">
         <%= link_to article_path(article.id) do %>
           <!-- 動画と画像で表示を分ける-->
           <% if article.video? %>
@@ -70,21 +79,21 @@
               <% end %>
           <% end %>
         <% end %>
-        
+
         <h4 class="text-center">
           <%= article.title %>
         </h4>
-        
+
         <!-- いいね機能 -->
         <% if article.liked_by?(current_user) %>
           <p class="text-center">
-            <%= link_to article_likes_path(article), class: "line", method: :delete do %>
+            <%= link_to article_likes_path(article), class: "text-dark", method: :delete do %>
               ❤️ いいね! <%= article.likes.count %>
             <% end %>
           </p>
         <% else %>
           <p class="text-center">
-            <%= link_to article_likes_path(article), class: "line", method: :post do %>
+            <%= link_to article_likes_path(article), class: "text-dark", method: :post do %>
               ❤️ いいね! <%= article.likes.count %>
             <% end %>
           </p>

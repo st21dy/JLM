@@ -1,14 +1,14 @@
 <!-- Header -->
-<header id="header">
-		<div class="fixed-top">
+	<header class="header">
+		<div >
 
 			<!-- Navigation -->
 			<nav class="navbar navbar-light bg-light sticky-top">
 			  <div class="container-fluid">
 			    <!-- Logo -->
 			    <div class="navbar-brand">
-			      <%= link_to root_path, class: "logo" do %>
-			    	  <%= image_tag 'logo.jpg', class: "icon"  %>
+			      <%= link_to root_path, class: "logo pull-left mt-95 ml-95 mb-95" do %>
+			    	  <%= image_tag 'logo.jpg',  width:"50", height:"50" %>
 			      <% end %>
 			    </div>
 			    <!-- Nav -->
@@ -16,26 +16,26 @@
 			      <span class="navbar-toggler-icon"></span>
 			    </button>
 			    <div class="collapse navbar-collapse" id="navbarResponsive">
-			      <ul class="navbar-nav">
+			      <ul class="navbar-nav pull-right text-right">
 			        <% if user_signed_in? %>
-			          <li class="nav-item">
-			            <%= link_to "MyPage", user_path(current_user.id), class: "nav-link" %>
+			          <li class="nav-item pull-left mt-0 mr-20 mb-0 ml-20">
+			            <%= link_to "MyPage", user_path(current_user.id), class: "nav-link text-dark border-bottom border-dark" %>
 			          </li>
-			          <li class="nav-item">
-			            <%= link_to "NewPost", new_article_path, class: "nav-link" %>
+			          <li class="nav-item pull-left mt-0 mr-20 mb-0 ml-20">
+			            <%= link_to "NewPost", new_article_path, class: "nav-link text-dark border-bottom border-dark" %>
 			          </li>
-			          <li class="nav-item">
-			            <%= link_to "AllPost", articles_path, class: "nav-link" %>
+			          <li class="nav-item pull-left mt-0 mr-20 mb-0 ml-20">
+			            <%= link_to "AllPost", articles_path, class: "nav-link text-dark border-bottom border-dark" %>
 			          </li>
-			          <li class="nav-item">
-			            <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link" %>
+			          <li class="nav-item pull-left mt-0 mr-20 mb-0 ml-20">
+			            <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link text-dark border-bottom border-dark" %>
 			          </li>
 		          <% else %>
-			          <li class="nav-item">
-			            <%= link_to "新規登録", new_user_registration_path, class: "nav-link" %>
+			          <li class="nav-item pull-left mt-0 mr-20 mb-0 ml-20">
+			            <%= link_to "新規登録", new_user_registration_path, class: "nav-link text-dark border-bottom border-dark" %>
 			          </li>
-			          <li class="nav-item">
-			            <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
+			          <li class="nav-item pull-left mt-0 mr-20 mb-0 ml-20">
+			            <%= link_to "ログイン", new_user_session_path, class: "nav-link text-dark border-bottom border-dark" %>
 			          </li>
 			         <% end %>
 			      </ul>
@@ -44,4 +44,4 @@
 			</nav>
 
 		</div>
-</header>
+	</header>
