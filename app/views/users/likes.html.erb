@@ -1,18 +1,18 @@
-<div id="likes">
+<div class="mx-sm-2 mx-md-3 mx-lg-5 pt-5 pb-5">
   <section>
     
     <header class="text-center">
       <h3>いいねした投稿</h3>
     </header>
     
-    <div class="article">
+    <div class="mt-3 mb-3">
       <article class="d-flex flex-wrap justify-content-center">
         <% @like_articles.each do |article| %>
-        <section class="border">
-          <header>
+        <section class="border m-1">
+          <header class="m-1">
             <%= attachment_image_tag article.user, :icon, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg", class: "border border-dark rounded-circle" %>
             <%= article.user.name %>
-          </header><br>
+          </header>
 
           <%= link_to article_path(article.id) do %>
             <!-- 動画と画像で表示を分ける-->
@@ -33,13 +33,13 @@
           <!-- いいね機能 -->
           <% if article.liked_by?(current_user) %>
             <p class="text-center">
-              <%= link_to article_likes_path(article), class: "line", method: :delete do %>
+              <%= link_to article_likes_path(article), class: "text-dark", method: :delete do %>
                 ❤️ いいね! <%= article.likes.count %>
               <% end %>
             </p>
           <% else %>
             <p class="text-center">
-              <%= link_to article_likes_path(article), class: "line", method: :post do %>
+              <%= link_to article_likes_path(article), class: "text-dark", method: :post do %>
                 ❤️ いいね! <%= article.likes.count %>
               <% end %>
             </p>

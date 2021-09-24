@@ -1,12 +1,8 @@
-<div id="useredit">
-  <div class="main">
-    <article class="profile">
+<div class="mx-sm-2 mx-md-3 mx-lg-5 pt-5 pb-5">
+  <div class="px-2">
+    <article class="text-center">
       
-      <header class="article text-center">
-        <h3>プロフィール編集</h3>
-      </header>
-      
-      <div class="article text-center">
+      <div class="text-center">
         <%= form_with model:@user, local:true do |f| %>
         
           <%= attachment_image_tag @user, :icon, :fill, 150, 150, fallback: "no_image.jpg", class: "border border-dark rounded-circle" %>
@@ -29,7 +25,7 @@
             <%= f.text_field :email, autofocus: true, id:"inputEmail", placeholder: "メールアドレス" %>
           </div>
           <%= f.submit "変更を保存" %>
-          <%= link_to '退会する', unsubscribe_users_path %>
+          <%= link_to '退会する', unsubscribe_users_path, class: "text-danger" %>
           
         <% end %>
       </div>

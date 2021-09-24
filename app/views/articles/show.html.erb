@@ -1,23 +1,23 @@
-<div id="articleshow">
+<div class="mx-sm-2 mx-md-3 mx-lg-5 pt-5 pb-5">
   <section>
     
-    <header class="text-center">
+    <header class="text-center mb-3">
       <% if @article.user == current_user %>
       <ul class="nav justify-content-center">
-        <li class="nav-item shadow border">
-          <%= link_to "編集", edit_article_path(@article), class: "nav-link" %>
+        <li class="nav-item shadow border m-1">
+          <%= link_to "編集", edit_article_path(@article), class: "nav-link text-dark" %>
         </li>
-        <li class="nav-item shadow border">
-          <%= link_to "削除",article_path(@article), class: "nav-link", method: :delete %>
+        <li class="nav-item shadow border m-1">
+          <%= link_to "削除",article_path(@article), class: "nav-link text-dark", method: :delete %>
         </li>
       </ul>
       <% end %>
     </header>
     
-    <div class="article">
+    <div>
       <article class="d-flex flex-wrap justify-content-center">
-        <section class="box border">
-          <header class="icon">
+        <section class="box border m-1">
+          <header class="m-1">
             <%= attachment_image_tag @user, :icon, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg", class: "border border-dark rounded-circle" %>
             <%= link_to @user.name, user_path(@user.id), class: "line" %>
             <!--投稿者の詳細ページへのリンク-->
@@ -52,26 +52,29 @@
           <!-- いいね機能 -->
           <% if @article.liked_by?(current_user) %>
             <p class="text-center">
-              <%= link_to article_likes_path(@article), class: "line", method: :delete do %>
+              <%= link_to article_likes_path(@article), class: "text-dark", method: :delete do %>
                 ❤️ いいね! <%= @article.likes.count %>
               <% end %>
             </p>
           <% else %>
             <p class="text-center">
-              <%= link_to article_likes_path(@article), class: "line", method: :post do %>
+              <%= link_to article_likes_path(@article), class: "text-dark", method: :post do %>
                 ❤️ いいね! <%= @article.likes.count %>
               <% end %>
             </p>
           <% end %>
           
-          <div>
+          <div class="text-center m-2">
             <% @article.article_comments.each do |article_comment| %>
-              <%= article_comment.user.name %>
-              <%= article_comment.created_at.strftime('%Y/%m/%d') %><%= article_comment.comment %>
+              <div class="border-bottom m-1">
+                <strong><%= article_comment.user.name %></strong>
+              
+                <%= article_comment.comment %>
     
-              <% if article_comment.user == current_user %>
-                <%= link_to "削除", article_article_comments_path(article_comment.article, article_comment), method: :delete %>
-              <% end %>
+                <% if article_comment.user == current_user %>
+                  <%= link_to "削除", article_article_comments_path(article_comment.article, article_comment), class: "text-danger", method: :delete %>
+                <% end %>
+              </div>
             <% end %>
 
             <%= form_with(model:[@article, @article_comment], local: true) do |f| %>
