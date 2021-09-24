@@ -8,7 +8,7 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarmypage" aria-expanded="false" aria-controls="navbar">
               <span class="navbar-toggler-icon"></span>
             </button>
-            
+
             <div class="collapse navbar-collapse" id="navbarmypage">
               <ul class="nav justify-content-center">
                 <li class="nav-item shadow border m-1">
@@ -37,7 +37,7 @@
             </div>
           </div>
         </nav>
-        
+
         <div class="text-center">
           <%= attachment_image_tag @user, :icon, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", class: "border border-dark rounded-circle" %>
         </div>
@@ -47,7 +47,7 @@
         <p class="body text-center">
           <%= @user.body %>
         </p>
-        
+
         <div class="text-center">
           <% if current_user != @user %>
             <button type="button" class="btn btn-secondary text-center shadow">
