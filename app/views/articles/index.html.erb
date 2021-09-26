@@ -1,6 +1,6 @@
-<div class="mx-sm-2 mx-md-3 mx-lg-5 pt-5 pb-5">
+<div class="mx-sm-2 mx-md-3 mx-lg-5 mb-3 pt-1 pb-5">
   <section>
-    
+
     <header class="text-center mb-3">
       <ul class="nav justify-content-center">
         <li class="nav-item shadow border m-1">
@@ -11,16 +11,16 @@
         </li>
       </ul>
     </header>
-    
+
     <div>
       <article class="d-flex flex-wrap justify-content-center">
         <% @articles.each do |article| %>
         <section class="border m-1">
           <header class="m-1">
-            <%= attachment_image_tag article.user, :icon, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg", class: "border border-dark rounded-circle" %>
+            <%= attachment_image_tag article.user, :icon, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg", size:'30x30', class: "border border-dark rounded-circle" %>
             <%= article.user.name %>
           </header>
-          
+
           <%= link_to article_path(article.id) do %>
             <!-- 動画と画像で表示を分ける-->
             <% if article.video? %>
@@ -32,11 +32,11 @@
                 <% end %>
             <% end %>
           <% end %>
-        
+
           <h4 class="text-center">
             <%= article.title %>
           </h4>
-          
+
           <!-- いいね機能 -->
           <% if article.liked_by?(current_user) %>
             <p class="text-center">
@@ -55,9 +55,9 @@
         <% end %>
       </article>
     </div>
-    
+
   </section>
-  
+
   <footer class="paginate">
     <nav aria-label="Page navigation example">
       <ul class="pagination justify-content-center">

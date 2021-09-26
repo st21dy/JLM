@@ -1,4 +1,4 @@
-<div class="mx-sm-2 mx-md-3 mx-lg-5 pt-5 pb-5">
+<div class="mx-sm-2 mx-md-3 mx-lg-5 mb-3 pt-2 pb-5">
   <div class="main">
     <article>
 
@@ -39,7 +39,7 @@
         </nav>
 
         <div class="text-center">
-          <%= attachment_image_tag @user, :icon, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", class: "border border-dark rounded-circle" %>
+          <%= attachment_image_tag @user, :icon, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'100x100', class: "border border-dark rounded-circle" %>
         </div>
         <h1 class="name text-center">
           <strong><%= @user.name %></strong>

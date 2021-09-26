@@ -1,4 +1,4 @@
-<div class="mx-sm-2 mx-md-3 mx-lg-5 pt-5 pb-5">
+<div class="mx-sm-2 mx-md-3 mx-lg-5 mb-3 pt-5 pb-5">
   <section>
     
     <div class="text-center">
@@ -19,7 +19,7 @@
             <% @articles.each do |article| %>
               <section class="border m-1">
                 <header class="m-1">
-                  <%= attachment_image_tag article.user, :icon, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg", class: "border border-dark rounded-circle" %>
+                  <%= attachment_image_tag article.user, :icon, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg", size:'30x30', class: "border border-dark rounded-circle" %>
                   <%= article.user.name %>
                 </header>
                   

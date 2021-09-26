@@ -1,11 +1,11 @@
-<div class="mx-sm-2 mx-md-3 mx-lg-5 pt-5 pb-5">
+<div class="mx-sm-2 mx-md-3 mx-lg-5 mb-3 pt-5 pb-5">
   <div class="px-2">
     <article class="text-center">
       
       <div class="text-center">
         <%= form_with model:@user, local:true do |f| %>
         
-          <%= attachment_image_tag @user, :icon, :fill, 150, 150, fallback: "no_image.jpg", class: "border border-dark rounded-circle" %>
+          <%= attachment_image_tag @user, :icon, :fill, 150, 150, fallback: "no_image.jpg", size:'150x150', class: "border border-dark rounded-circle" %>
           
           <div class="form-group">
             <label for="inputImage">プロフィール写真</label>

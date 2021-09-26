@@ -1,11 +1,52 @@
-<footer>
+  <footer class="fixed-bottom bg-dark">
 
-  <div class="footer footer-light bg-light fixed-bottom w-auto h-auto text-center text-dark b-0 m-auto">
-    <div class="container-fluid">
-      <small>
-        (c)2021 Japan Lacrosse Miccle
-      </small>
-    </div>
-  </div>
+    <div>
 
-</footer>
+			<!-- Navigation -->
+			<nav class="navbar navbar-dark bg-dark sticky-top">
+			  <div class="container-fluid">
+
+			    <!-- Nav -->
+
+			    <div class="collapse navbar-collapse" id="navbarResponsive">
+			      <ul class="navbar-nav pull-right text-right">
+			        <% if user_signed_in? %>
+			          <li class="nav-item pull-left">
+			            <%= link_to "MyPage", user_path(current_user.id), class: "nav-link text-white" %>
+			          </li>
+			          <li class="nav-item pull-left">
+			            <%= link_to "NewPost", new_article_path, class: "nav-link text-white" %>
+			          </li>
+			          <li class="nav-item pull-left">
+			            <%= link_to "AllPost", articles_path, class: "nav-link text-white" %>
+			          </li>
+			          <li class="nav-item pull-left">
+			            <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link text-white" %>
+			          </li>
+		          <% else %>
+			          <li class="nav-item pull-left">
+			            <%= link_to "新規登録", new_user_registration_path, class: "nav-link text-white" %>
+			          </li>
+			          <li class="nav-item pull-left">
+			            <%= link_to "ログイン", new_user_session_path, class: "nav-link text-white" %>
+			          </li>
+			         <% end %>
+			      </ul>
+			    </div>
+
+			    <!-- Logo -->
+			    <div class="navbar-brand">
+			      <%= link_to root_path, class: "pull-left" do %>
+			    	  <%= image_tag 'logo.jpg',  width:"40", height:"40" %>
+			      <% end %>
+			    </div>
+
+			    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-expanded="false" aria-controls="navbar">
+			      <span class="navbar-toggler-icon"></span>
+			    </button>
+
+			  </div>
+			</nav>
+
+		</div>
+	</footer>

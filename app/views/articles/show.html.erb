@@ -1,4 +1,4 @@
-<div class="mx-sm-2 mx-md-3 mx-lg-5 pt-5 pb-5">
+<div class="mx-sm-2 mx-md-3 mx-lg-5 mb-3 pt-5 pb-5">
   <section>
     
     <header class="text-center mb-3">
@@ -16,9 +16,9 @@
     
     <div>
       <article class="d-flex flex-wrap justify-content-center">
-        <section class="box border m-1">
+        <section class="m-1">
           <header class="m-1">
-            <%= attachment_image_tag @user, :icon, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg", class: "border border-dark rounded-circle" %>
+            <%= attachment_image_tag @user, :icon, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg", size:'30x30', class: "border border-dark rounded-circle" %>
             <%= link_to @user.name, user_path(@user.id), class: "line" %>
             <!--投稿者の詳細ページへのリンク-->
           </header>

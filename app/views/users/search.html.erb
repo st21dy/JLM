@@ -1,4 +1,4 @@
-<div class="mx-sm-2 mx-md-3 mx-lg-5 pt-5 pb-5">
+<div class="mx-sm-2 mx-md-3 mx-lg-5 mb-3 pt-5 pb-5">
   <section>
     
     <div class="text-center">
@@ -17,7 +17,7 @@
           <% @users.each do |user| %>
             <%= link_to user_path(user.id) do %>
           
-              <%= attachment_image_tag user, :icon, size: '30x30', fallback: "no_image.jpg", class: "border border-dark rounded-circle" %>
+              <%= attachment_image_tag user, :icon, size: '30x30', fallback: "no_image.jpg", size:'30x30', class: "border border-dark rounded-circle" %>
           
               <%= user.name %>
           
