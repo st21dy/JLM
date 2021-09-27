@@ -3,7 +3,7 @@
     
     <div class="text-center">
       <%= form_with url: search_articles_path, method: :get, local: true do |f| %>
-        <%= f.text_field :keyword, value: @keyword %>
+        <%= f.text_field :keyword, value: @keyword, placeholder: "「タイトル」or「＃タグ」" %>
         
         <%= f.submit "検索" %>
       <% end %>
@@ -18,9 +18,28 @@
           <article class="d-flex flex-wrap justify-content-center">
             <% @articles.each do |article| %>
               <section class="border m-1">
-                <header class="m-1">
-                  <%= attachment_image_tag article.user, :icon, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg", size:'30x30', class: "border border-dark rounded-circle" %>
-                  <%= article.user.name %>
+                <header class="mt-1 mx-1 d-flex bd-highlight">
+                  <div class="mr-auto bd-highlight">
+                    <%= attachment_image_tag article.user, :icon, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg", size:'30x30', class: "border border-dark rounded-circle" %>
+                    <%= article.user.name %>
+                  </div>
+                  
+                  <div class="pt-1 pr-2 bd-highlight">
+                    <!-- いいね機能 -->
+                    <% if article.liked_by?(current_user) %>
+                      <p class="text-center">
+                        <%= link_to article_likes_path(article), class: "text-dark", method: :delete do %>
+                          <%= icon 'far', 'thumbs-up' %> <%= article.likes.count %>
+                        <% end %>
+                      </p>
+                    <% else %>
+                      <p class="text-center">
+                        <%= link_to article_likes_path(article), class: "text-dark", method: :post do %>
+                          <%= icon 'far', 'thumbs-up' %> <%= article.likes.count %>
+                        <% end %>
+                      </p>
+                    <% end %>
+                  </div>
                 </header>
                   
                 <%= link_to article_path(article.id) do %>
@@ -28,31 +47,13 @@
                   <% if article.video? %>
                     <% type = file_type(article.video.url)%> <!-- app/helpers/application_helper.rbにfile_typeを定義 -->
                       <% if type == 'image' %>
-                        <%= image_tag article.video.url, :size => "300x300" %>
+                        <%= image_tag article.video.url, :size => "280x280" %>
                       <% elsif type == 'video' %>
-                        <%= video_tag article.video.url, autoplay: true, muted: true, controls: true, :size => "300x300" %>
+                        <%= video_tag article.video.url, autoplay: true, muted: true, controls: true, :size => "280x280" %>
                       <% end %>
                   <% end %>
                 <% end %>
-        
-                <h4 class="text-center">
-                  <%= article.title %>
-                </h4>
-          
-                <!-- いいね機能 -->
-                <% if article.liked_by?(current_user) %>
-                  <p class="text-center">
-                    <%= link_to article_likes_path(article), class: "text-dark", method: :delete do %>
-                      ❤️ いいね! <%= article.likes.count %>
-                    <% end %>
-                  </p>
-                <% else %>
-                  <p class="text-center">
-                    <%= link_to article_likes_path(article), class: "text-dark", method: :post do %>
-                      ❤️ いいね! <%= article.likes.count %>
-                    <% end %>
-                  </p>
-                <% end %>
+                
               </section>
             <% end %>
           </article>

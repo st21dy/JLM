@@ -14,7 +14,7 @@ class ArticlesController < ApplicationController
   end
 
   def index
-    @articles = Article.page(params[:page]).reverse_order
+    @articles = Article.page(params[:page]).per(50)
 
   end
 

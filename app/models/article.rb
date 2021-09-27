@@ -1,33 +1,33 @@
 class Article < ApplicationRecord
-  
+
   belongs_to :user
   attachment :image
-  
+
   mount_uploader :video, VideoUploader
-  
-  validates :title, :video, :body, presence: true
-  
+
+  validates :title, :video, presence: true
+
   has_many :likes, dependent: :destroy
   has_many :article_comments, dependent: :destroy
-  
+
   has_many :article_hashtag_relations
   has_many :hashtags, through: :article_hashtag_relations
-  
+
   def liked_by?(user)
     likes.where(user_id: user.id).exists?
   end
   # liked_by?メソッドは引用されたユーザーIDがlikesテーブル内に存在(exists?)するかどうかを調べる。
-  
-  
+
+
   def self.search(keyword)
     if keyword
       Article.where(['title LIKE ? OR caption LIKE ?', "%#{keyword}%", "%#{keyword}%"])
     else
       Article.all
     end
-      
+
   end
-  
+
   #DBへのコミット直前に実施する
   after_create do
     article = Article.find_by(id: self.id)
@@ -40,7 +40,7 @@ class Article < ApplicationRecord
     end
   end
 
-  before_update do 
+  before_update do
     article = Article.find_by(id: self.id)
     article.hashtags.clear
     hashtags = self.caption.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
@@ -49,5 +49,5 @@ class Article < ApplicationRecord
       article.hashtags << tag
     end
   end
-  
+
 end

@@ -13,9 +13,9 @@
           <% if @article.video? %>
             <% type = file_type(@article.video.url)%>
               <% if type == 'image' %>
-                <%= image_tag @article.video.url, :size => "300x300" %>
+                <%= image_tag @article.video.url, :size => "280x280" %>
               <% elsif type == 'video' %>
-                <%= video_tag @article.video.url, autoplay: true, muted: true, controls: true, :size => "300x300" %>
+                <%= video_tag @article.video.url, autoplay: true, muted: true, controls: true, :size => "280x280" %>
               <% end %>
           <% end %>
 
