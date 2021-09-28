@@ -1,11 +1,9 @@
 Rails.application.routes.draw do
-
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'homes#top'
 
   resources :users do
-
     collection do
       get 'unsubscribe'
       patch 'withdraw'
@@ -15,22 +13,15 @@ Rails.application.routes.draw do
       get :follows, :followers, :likes
     end
     resource :follows, only: [:create, :destroy]
-
   end
-  
-  
 
   resources :articles do
-
     resource :likes, only: [:create, :destroy]
     resource :article_comments, only: [:create, :destroy]
     collection do
       get 'search'
     end
-
   end
 
   get '/article/hashtag/:name', to: "articles#hashtag"
-
-
 end
