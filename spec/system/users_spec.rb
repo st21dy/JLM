@@ -101,5 +101,16 @@ describe 'userのテスト' do
       end
     end
   end
+  
+  describe 'search画面のテスト' do
+    before do
+      visit search_users_path
+    end
+    context '表示の確認' do
+      it '検索ボタンが表示される' do
+        expect(page).to have_button '検索'
+      end
+    end
+  end
 
 end
