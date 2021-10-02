@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe User do
-  describe '#create' do
+  describe 'create' do
     it "新規登録できるか" do
       expect(FactoryBot.build(:user)).to be_valid
     end

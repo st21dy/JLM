@@ -2,16 +2,16 @@
   <section>
 
     <header class="text-center mb-3">
-      <ul class="nav justify-content-center">
+      <ul class="nav justify-content-end">
         <li class="nav-item shadow border m-1">
           <%= link_to search_articles_path, class: "nav-link text-dark" do %>
             <%= icon 'fas', 'search-plus' %>
           <% end %>
         </li>
+      </ul>
+      <ul class="nav justify-content-center">
         <li class="nav-item shadow border m-1">
-          <%= link_to new_article_path, class: "nav-link text-dark" do %>
-            <%= icon 'fas', 'plus' %>
-          <% end %>
+          #<%= @tag.hashname %>
         </li>
       </ul>
     </header>
