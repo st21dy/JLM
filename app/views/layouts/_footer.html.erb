@@ -1,6 +1,6 @@
   <footer class="fixed-bottom bg-dark">
 
-		<div class="p-2">
+		<div class="p-1">
 			<ul class="nav justify-content-center">
 				<li class="nav-item border border-white rounded m-1">
 					<%= link_to root_path, class: "pull-left" do %>
@@ -29,6 +29,11 @@
 						<% end %>
 					</li>
 				<% else %>
+					<li class="nav-item border border-white rounded m-1">
+						<%= link_to about_path, class: "nav-link text-white" do %>
+							<%= icon 'fas', 'info' %>
+						<% end %>
+					</li>
 					<li class="nav-item border border-white rounded m-1">
 						<%= link_to new_user_registration_path, class: "nav-link text-white" do %>
 							<%= icon 'fas', 'user-cog' %>

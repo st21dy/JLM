@@ -14,7 +14,7 @@
     <div>
       <article class="d-flex flex-wrap justify-content-center">
         <% @articles.each do |article| %>
-        <section class="border m-1">
+        <section class="card m-1" >
           <header class="mt-1 mx-1 d-flex bd-highlight">
             <div class="mr-auto bd-highlight">
               <%= attachment_image_tag article.user, :icon, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg", size:'30x30', class: "border border-dark rounded-circle" %>
@@ -66,3 +66,4 @@
     </nav>
   </footer>
 
+</div>

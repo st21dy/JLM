@@ -69,7 +69,7 @@
   <div>
     <article class="d-flex flex-wrap justify-content-center">
       <% @user.articles.each do |article| %>
-      <section class="border m-1 p-1">
+      <section class="card m-1">
         <%= link_to article_path(article.id) do %>
           <!-- 動画と画像で表示を分ける-->
           <% if article.video? %>
