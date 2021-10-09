@@ -1,12 +1,18 @@
 require 'rails_helper'
 
 describe "index画面のテスト" do
-  let(:article) { FactoryBot.create(:article) }
-  
+  let(:user_a) { FactoryBot.create(:user, name: 'ユーザーA', email: 'a@email.com') }
+  let(:article_a) { FactoryBot.create(:article, user: user_a) }
+
   before do
+    visit new_user_session_path
+    fill_in 'user[email]', with: "a@email.com"
+    fill_in 'user[password]', with: "password"
+    click_button 'ログイン'
+      
     visit articles_path
   end
-  
+
   context "表示の確認" do
     it "searchリンクが表示される" do
       expect(page).to have_link nil, href: search_articles_path
@@ -24,7 +30,7 @@ describe "search画面のテスト" do
     end
   end
 end
-  
+
 describe "new画面のテスト" do
   before do
     visit new_article_path
@@ -35,10 +41,10 @@ describe "new画面のテスト" do
     end
   end
 end
-  
+
 describe "edit画面のテスト" do
   let(:article) { FactoryBot.create(:article) }
-  
+
   before do
     visit edit_article_path(article)
   end

@@ -12,7 +12,7 @@
         <p class="body text-center">
           <%= @user.body %>
         </p>
-        
+
         <ul class="nav justify-content-center">
           <li class="nav-item shadow border m-1">
             <%= link_to follows_user_path(@user), class: "nav-link text-dark" do %>
@@ -29,7 +29,7 @@
               <%= icon 'fas', 'search-plus' %>
             <% end %>
           </li>
-          
+
           <!--ログインしていないユーザーのみ表示-->
           <% if current_user != @user %>
             <li class="nav-item shadow border m-1">
@@ -46,7 +46,7 @@
               </button>
             </li>
           <% end %>
-          
+
           <!--ログインしているユーザーのみ表示-->
           <% if @user.id == current_user.id %>
             <li class="nav-item shadow border m-1">
