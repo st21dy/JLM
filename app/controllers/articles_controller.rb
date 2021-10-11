@@ -6,7 +6,6 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     @article.user_id = current_user.id
-    #binding.pry
     @article.save
     redirect_to articles_path
   end
@@ -24,7 +23,7 @@ class ArticlesController < ApplicationController
   def destroy
     @article = Article.find(params[:id])
     @article.destroy
-    redirect_to root_path
+    redirect_to articles_path
   end
 
   def edit
