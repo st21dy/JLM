@@ -22,6 +22,7 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article = Article.find(params[:id])
+    @article.remove_video!
     @article.destroy
     redirect_to articles_path
   end
