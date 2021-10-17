@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
   has_many :article_comments, dependent: :destroy
 
+  validates :name, :email, presence: true
   validates :body, presence: false, length: { maximum: 50 }
   # 自己紹介の最高文字数は50文字
 

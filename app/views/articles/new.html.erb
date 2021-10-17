@@ -1,15 +1,19 @@
 <div class="mx-sm-2 mx-md-3 mx-lg-5 mb-3 pt-2 pb-5">
   <div class="m-1">
-      
+
     <header class="text-center">
       <h3>NEW POST</h3>
     </header>
-      
+
+    <!--error_form-->
+    <%= render 'layouts/error_form', error: @article %>
+    <!--error_form-->
+
     <div class="text-center">
       <%= form_with model: @article, local:true do |f| %>
-      
+
         <%= f.file_field :video, :accept => 'video/*,image/jpeg,image/gif,image/png,image/' %>
-        
+
         <div class="form-group">
           <label for="inputTitle">タイトル</label>
           <br>
@@ -24,11 +28,11 @@
           <%= f.text_area :caption, placeholder: "#タグ" %>
         </div>
         <%= f.submit '投稿' %>
-        
+
       <% end %>
-    
+
     </div>
-    
+
   </div>
 </div>
 

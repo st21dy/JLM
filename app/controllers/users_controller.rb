@@ -1,19 +1,16 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:likes]
+  before_action :set_user, only: [:likes, :show, :edit, :update]
 
   def show
-    @user = User.find(params[:id])
     @articles = @user.articles.page(params[:page]).reverse_order
     @following_users = @user.following_user
     @follower_users = @user.follower_user
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
     @user.update(user_params)
     redirect_to user_path(@user.id)
   end

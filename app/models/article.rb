@@ -4,7 +4,9 @@ class Article < ApplicationRecord
 
   mount_uploader :video, VideoUploader
 
-  validates :title, :video, presence: true
+  validates :title, :video, :body, :caption, presence: true
+  validates :caption, format: { without: /＃/, message: ' # は半角で入力してください' }
+  validates :caption, format: { with: /#/, message: ' # を先頭に付けてください'}
 
   has_many :likes, dependent: :destroy
   has_many :article_comments, dependent: :destroy
