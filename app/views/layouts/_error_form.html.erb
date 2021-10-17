@@ -1,0 +1,11 @@
+<% if error.errors.any? %>
+  <div class="justify-content-center">
+    <ul class="border border-danger text-center text-danger list-unstyled m-3 p-2">
+      <% error.errors.full_messages.each do |message| %>
+        <li>
+          <%= message %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
