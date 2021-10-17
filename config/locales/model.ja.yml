@@ -1,0 +1,17 @@
+ja:
+  activerecord:
+    attributes:
+        user:
+          name: ユーザーネーム
+          email: メールアドレス
+          icon_id: プロフィール画像
+          crypted_password: パスワード
+          body: 自己紹介
+          
+    attributes:
+        article:
+          title: タイトル
+          video: 投稿ファイル
+          body: 説明
+          caption: ＃タグ
+          
