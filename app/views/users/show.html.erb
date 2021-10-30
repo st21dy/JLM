@@ -24,11 +24,6 @@
               <%= icon 'far', 'user-circle' %>
             <% end %>
           </li>
-          <li class="nav-item shadow border m-1">
-            <%= link_to search_users_path, class: "nav-link text-dark" do %>
-              <%= icon 'fas', 'search-plus' %>
-            <% end %>
-          </li>
 
           <!--ログインしていないユーザーのみ表示-->
           <% if current_user != @user %>
@@ -57,6 +52,11 @@
             <li class="nav-item shadow border m-1">
               <%= link_to edit_user_path(@user), class: "nav-link text-dark" do %>
                 <%= icon 'fas', 'user-edit' %>
+              <% end %>
+            </li>
+            <li class="nav-item shadow border m-1">
+              <%= link_to destroy_user_session_path, method: :delete, class: "nav-link text-dark" do %>
+                <%= icon 'fas', 'sign-out-alt' %>
               <% end %>
             </li>
           <% end %>

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:likes, :show, :edit, :update]
+  before_action :set_user, only: [:likes, :show, :edit, :update,]
 
   def show
     @articles = @user.articles.page(params[:page]).reverse_order

@@ -1,69 +1,108 @@
-<div class="mx-sm-2 mx-md-3 mx-lg-5 mb-3 pt-1 pb-5">
-  <section>
+<% if admin_signed_in? %>
 
-    <header class="text-center mb-3">
-      <ul class="nav justify-content-end">
-        <li class="nav-item shadow border m-1">
-          <%= link_to search_articles_path, class: "nav-link text-dark" do %>
-            <%= icon 'fas', 'search-plus' %>
-          <% end %>
-        </li>
-      </ul>
-    </header>
-
-    <div>
-      <article class="d-flex flex-wrap justify-content-center">
-        <% @articles.each do |article| %>
+  <div class="mx-sm-2 mx-md-3 mx-lg-5 mb-3 pt-1 pb-5">
+    <article class="d-flex flex-wrap justify-content-center">
+      <% @articles.each do |article| %>
         <section class="card m-1" >
           <header class="mt-1 mx-1 d-flex bd-highlight">
             <div class="mr-auto bd-highlight">
               <%= attachment_image_tag article.user, :icon, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg", size:'30x30', class: "border border-dark rounded-circle" %>
               <%= article.user.name %>
-            </div>
-
-            <div class="pt-1 pr-2 bd-highlight">
-              <!-- いいね機能 -->
-              <% if article.liked_by?(current_user) %>
-                <p class="text-center m-1">
-                  <%= link_to article_likes_path(article), class: "text-dark", method: :delete do %>
-                    <%= icon 'far', 'thumbs-up' %> <%= article.likes.count %>
-                  <% end %>
-                </p>
-              <% else %>
-                <p class="text-center m-1">
-                  <%= link_to article_likes_path(article), class: "text-dark", method: :post do %>
-                    <%= icon 'far', 'thumbs-up' %> <%= article.likes.count %>
-                  <% end %>
-                </p>
+              <%= link_to article_path(article), class: "text-danger", method: :delete do %>
+                <%= icon 'fas', 'trash-alt' %>
               <% end %>
             </div>
           </header>
-
-          <%= link_to article_path(article.id) do %>
-            <!-- 動画と画像で表示を分ける-->
-            <% if article.video? %>
-              <% type = file_type(article.video.url)%> <!-- app/helpers/application_helper.rbにfile_typeを定義 -->
-                <% if type == 'image' %>
-                  <%= image_tag article.video.url, class:'post-thum' %>
-                <% elsif type == 'video' %>
-                  <%= video_tag article.video.url, autoplay: true, muted: true, controls: true, class:'post-thum' %>
-                <% end %>
-            <% end %>
+          
+          <!-- 動画と画像で表示を分ける-->
+          <% if article.video? %>
+            <% type = file_type(article.video.url)%> <!-- app/helpers/application_helper.rbにfile_typeを定義 -->
+              <% if type == 'image' %>
+                <%= image_tag article.video.url, class:'post-thum' %>
+              <% elsif type == 'video' %>
+                <%= video_tag article.video.url, autoplay: true, muted: true, controls: true, class:'post-thum' %>
+              <% end %>
           <% end %>
-
         </section>
-        <% end %>
-      </article>
-    </div>
+      <% end %>
+    </article>
+  </div>
+  
+<% else %>
 
-  </section>
-
-  <footer class="paginate">
-    <nav aria-label="Page navigation example">
-      <ul class="pagination justify-content-center">
-        <%= paginate @articles %>
-      </ul>
-    </nav>
-  </footer>
-
-</div>
+  <div class="mx-sm-2 mx-md-3 mx-lg-5 mb-3 pt-1 pb-5">
+    <section>
+      
+      <header class="text-center mb-3">
+        <ul class="nav justify-content-end">
+          <li class="nav-item shadow border m-1">
+            <%= link_to new_article_path, class: "nav-link text-dark" do %>
+              <%= icon 'fas', 'plus' %>
+						<% end %>
+          </li>
+          <li class="nav-item shadow border m-1">
+            <%= link_to search_articles_path, class: "nav-link text-dark" do %>
+              <%= icon 'fas', 'search-plus' %>
+            <% end %>
+          </li>
+        </ul>
+      </header>
+      
+      <div>
+        <article class="d-flex flex-wrap justify-content-center">
+          <% @articles.each do |article| %>
+          <section class="card m-1" >
+            <header class="mt-1 mx-1 d-flex bd-highlight">
+              <div class="mr-auto bd-highlight">
+                <%= attachment_image_tag article.user, :icon, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg", size:'30x30', class: "border border-dark rounded-circle" %>
+                <%= article.user.name %>
+              </div>
+              
+              <div class="pt-1 pr-2 bd-highlight">
+                <!-- いいね機能 -->
+                <% if article.liked_by?(current_user) %>
+                  <p class="text-center m-1">
+                    <%= link_to article_likes_path(article), class: "text-dark", method: :delete do %>
+                      <%= icon 'far', 'thumbs-up' %> <%= article.likes.count %>
+                    <% end %>
+                  </p>
+                <% else %>
+                  <p class="text-center m-1">
+                    <%= link_to article_likes_path(article), class: "text-dark", method: :post do %>
+                      <%= icon 'far', 'thumbs-up' %> <%= article.likes.count %>
+                    <% end %>
+                  </p>
+                <% end %>
+              </div>
+            </header>
+            
+            <%= link_to article_path(article.id) do %>
+              <!-- 動画と画像で表示を分ける-->
+              <% if article.video? %>
+                <% type = file_type(article.video.url)%> <!-- app/helpers/application_helper.rbにfile_typeを定義 -->
+                  <% if type == 'image' %>
+                    <%= image_tag article.video.url, class:'post-thum' %>
+                  <% elsif type == 'video' %>
+                    <%= video_tag article.video.url, autoplay: true, muted: true, controls: true, class:'post-thum' %>
+                  <% end %>
+              <% end %>
+            <% end %>
+            
+          </section>
+          <% end %>
+        </article>
+      </div>
+      
+    </section>
+    
+    <footer class="paginate">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <%= paginate @articles %>
+        </ul>
+      </nav>
+    </footer>
+    
+  </div>
+  
+<% end %>

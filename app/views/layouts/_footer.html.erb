@@ -1,51 +1,65 @@
   <footer class="fixed-bottom bg-dark">
 
-		<div class="p-1">
-			<ul class="nav justify-content-center">
+	<div class="p-1">
+		<ul class="nav justify-content-center">
+			<li class="nav-item border border-white rounded m-1">
+				<%= link_to root_path, class: "pull-left" do %>
+					<%= image_tag 'logo.jpg',  width:"40", height:"40" %>
+				<% end %>
+			</li>
+			<% if user_signed_in? %>
 				<li class="nav-item border border-white rounded m-1">
-					<%= link_to root_path, class: "pull-left" do %>
-						<%= image_tag 'logo.jpg',  width:"40", height:"40" %>
+					<%= link_to news_index_path, class: "nav-link text-white" do %>
+						<%= icon 'fas', 'newspaper' %>
 					<% end %>
 				</li>
-				<% if user_signed_in? %>
-					<li class="nav-item border border-white rounded m-1">
-						<%= link_to articles_path, class: "nav-link text-white" do %>
-							<%= icon 'fas', 'home' %>
-						<% end %>
-					</li>
-					<li class="nav-item border border-white rounded m-1">
-						<%= link_to new_article_path, class: "nav-link text-white" do %>
-							<%= icon 'fas', 'plus' %>
-						<% end %>
-					</li>
-					<li class="nav-item border border-white rounded m-1">
-						<%= link_to user_path(current_user.id), class: "nav-link text-white" do %>
-							<%= icon 'fas', 'user' %>
-						<% end %>
-					</li>
-					<li class="nav-item border border-white rounded m-1">
-						<%= link_to destroy_user_session_path, method: :delete, class: "nav-link text-white" do %>
-							<%= icon 'fas', 'sign-out-alt' %>
-						<% end %>
-					</li>
-				<% else %>
-					<li class="nav-item border border-white rounded m-1">
-						<%= link_to about_path, class: "nav-link text-white" do %>
-							<%= icon 'fas', 'info' %>
-						<% end %>
-					</li>
-					<li class="nav-item border border-white rounded m-1">
-						<%= link_to new_user_registration_path, class: "nav-link text-white" do %>
-							<%= icon 'fas', 'user-cog' %>
-						<% end %>
-					</li>
-					<li class="nav-item border border-white rounded m-1">
-						<%= link_to new_user_session_path, class: "nav-link text-white" do %>
-							<%= icon 'fas', 'sign-in-alt' %>
-						<% end %>
-					</li>
-				<% end %>
-			</ul>
-		</div>
-		
-	</footer>
+				<li class="nav-item border border-white rounded m-1">
+					<%= link_to articles_path, class: "nav-link text-white" do %>
+						<%= icon 'fas', 'images' %>
+					<% end %>
+				</li>
+				<li class="nav-item border border-white rounded m-1">
+					<%= link_to user_path(current_user.id), class: "nav-link text-white" do %>
+						<%= icon 'fas', 'user' %>
+					<% end %>
+				</li>
+			<% elsif admin_signed_in? %>
+				<li class="nav-item border border-white rounded m-1">
+					<%= link_to news_index_path, class: "nav-link text-white" do %>
+						<%= icon 'fas', 'newspaper' %>
+					<% end %>
+				</li>
+				<li class="nav-item border border-white rounded m-1">
+					<%= link_to articles_path, class: "nav-link text-white" do %>
+						<%= icon 'fas', 'images' %>
+					<% end %>
+				</li>
+				<li class="nav-item border border-white rounded m-1">
+						<%= icon 'fas', 'user' %>
+				</li>
+				<li class="nav-item border border-white rounded m-1">
+					<%= link_to destroy_admin_session_path, method: :delete, class: "nav-link text-white" do %>
+						<%= icon 'fas', 'sign-out-alt' %>
+					<% end %>
+				</li>
+			<% else %>
+				<li class="nav-item border border-white rounded m-1">
+					<%= link_to about_path, class: "nav-link text-white" do %>
+						<%= icon 'fas', 'info' %>
+					<% end %>
+				</li>
+				<li class="nav-item border border-white rounded m-1">
+					<%= link_to new_user_registration_path, class: "nav-link text-white" do %>
+						<%= icon 'fas', 'user-cog' %>
+					<% end %>
+				</li>
+				<li class="nav-item border border-white rounded m-1">
+					<%= link_to new_user_session_path, class: "nav-link text-white" do %>
+						<%= icon 'fas', 'sign-in-alt' %>
+					<% end %>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+
+</footer>

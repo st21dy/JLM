@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  devise_for :admins, controllers: {
+    sessions: 'admins/sessions',
+    passwords: 'admins/passwords',
+    registrations: 'admins/registrations'
+  }
+  
+  resources :news, only: [:create, :index, :show, :destroy]
+  
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'homes#top'
@@ -25,4 +33,5 @@ Rails.application.routes.draw do
   end
 
   get '/article/hashtag/:name', to: "articles#hashtag"
+  
 end
