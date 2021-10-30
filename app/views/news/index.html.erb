@@ -1,0 +1,90 @@
+<% if admin_signed_in? %>
+
+  <div class="mx-sm-2 mx-md-3 mx-lg-5 mb-3 pt-2 pb-5">
+    <div class="m-1">
+
+      <div class="card text-center p-2">
+        <%= form_for(@new, url: news_index_path, method: :new) do |f| %>
+          
+          <%= f.attachment_field :image %>
+            
+          <div class="form-group">
+            <label for="inputTitle">対戦</label>
+            <br>
+            <%= f.text_field :title, placeholder: "対戦" %>
+            <br>
+            <label for="inputScore">スコア</label>
+            <br>
+            <%= f.text_field :score, placeholder: "スコア" %>
+            <br>
+            <label for="inputLeague">リーグ</label>
+            <br>
+            <%= f.text_field :league, placeholder: "リーグ" %>
+          </div>
+          <%= f.submit '投稿' %>
+
+        <% end %>
+      </div>
+
+      <article class="d-flex flex-wrap justify-content-center">
+        <% @news.each do |new| %>
+          <section class="bg-dark bg-opacity-75 card m-2 m-md-3 m-lg-5" >
+            <%= link_to news_path(new.id) do %>
+              <%= attachment_image_tag new, :image, :fill, 300, 200, class: "border rounded m-1" %>
+            <% end %>
+            
+            <h4 class="text-center text-white m-1">
+              <%= new.title %>
+            </h4>
+            
+            <h1 class="text-center text-white m-1">
+              <%= new.score %>
+            </h1>
+            
+            <h6 class="text-center text-white m-1">
+              <%= new.league %>
+            </h6>
+            
+            <small class="d-flex flex-nowrap text-white">
+              <%= new.created_at.strftime('%Y/%m/%d') %>
+            </small>
+          </section>
+        <% end %>
+      </article>
+      
+    </div>
+  </div>
+  
+<% else %>
+  
+  <div class="mx-sm-2 mx-md-3 mx-lg-5 mb-3 pt-2 pb-5">
+    <div class="m-1">
+
+      <article class="d-flex flex-wrap justify-content-center">
+        <% @news.each do |new| %>
+          <section class="bg-dark bg-opacity-75 card m-2 m-md-3 m-lg-5" >
+            <%= attachment_image_tag new, :image, :fill, 300, 200, class: "border rounded m-1" %>
+
+            <h4 class="text-center text-white m-1">
+              <%= new.title %>
+            </h4>
+
+            <h1 class="text-center text-white m-1">
+              <%= new.score %>
+            </h1>
+
+            <h6 class="text-center text-white m-1">
+              <%= new.league %>
+            </h6>
+
+            <small class="d-flex flex-nowrap text-white">
+              <%= new.created_at.strftime('%Y/%m/%d') %>
+            </small>
+          </section>
+        <% end %>
+      </article>
+
+    </div>
+  </div>
+  
+<% end %>
