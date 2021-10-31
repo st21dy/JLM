@@ -1,0 +1,30 @@
+<div class="mx-sm-2 mx-md-3 mx-lg-5 mb-3 pt-5 pb-5">
+  <div class="d-flex flex-wrap justify-content-center">
+    <% @users.each do |user| %>
+      <article class="bg-dark bg-opacity-75 card m-2 m-md-3 m-lg-5 p-3 col-xl-3">
+        <h3 class="font-weight-bold text-center text-danger">
+          <% if user.is_deleted == true %>
+            退会済み
+					<% else%>
+					<% end %>
+        </h3>
+          
+        <div class="text-center">
+          <%= attachment_image_tag user, :icon, size: '100x100', fallback: "no_image.jpg", size:'100x100', class: "border border-dark rounded-circle" %>
+        </div>
+        
+        <div class="card-body">
+          <h1 class="font-weight-bold text-center text-white">
+            <%= user.name %>
+          </h1>
+          
+          <h3 class="font-weight-bold text-center text-white">
+            <%= user.body %>
+          </h3>
+          
+        </div>
+
+      </article>
+    <% end %>
+  </div>
+</div>
