@@ -1,94 +1,91 @@
-<div class="mx-sm-2 mx-md-3 mx-lg-5 mb-3 pt-5 pb-5">
-  <section>
-    <div>
-      <article class="d-flex flex-wrap justify-content-center">
-        <section class="m-1">
-          <header class="mr-2 d-flex bd-highlight">
-            <div class="mr-auto px-1 bd-highlight">
-              <%= attachment_image_tag @user, :icon, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg", size:'30x30', class: "border border-dark rounded-circle" %>
-              <%= link_to @user.name, user_path(@user.id), class: "text-dark" %>
-              <!--投稿者の詳細ページへのリンク-->
-            </div>
+<div id="show">
+  <div class="show">
+    <div class="d-flex flex-wrap justify-content-center text-white">
+      <div class="m-1">
+        <header class="mr-2 d-flex">
+          <div class="mr-auto px-1">
+            <%= attachment_image_tag @user, :icon, :fill, 30, 30, format: 'jpeg', fallback: "no_image.jpg", size:'30x30', class: "border border-dark rounded-circle" %>
+            <%= link_to @user.name, user_path(@user.id), class: "text-white" %>
+            <!--投稿者の詳細ページへのリンク-->
+          </div>
 
-            <div class="px-1 bd-highlight">
-              <!-- いいね機能 -->
-              <% if @article.liked_by?(current_user) %>
-                <p>
-                  <%= link_to article_likes_path(@article), class: "text-dark", method: :delete do %>
-                    <%= icon 'far', 'thumbs-up' %> <%= @article.likes.count %>
-                  <% end %>
-                </p>
-              <% else %>
-                <p>
-                  <%= link_to article_likes_path(@article), class: "text-dark", method: :post do %>
-                    <%= icon 'far', 'thumbs-up' %> <%= @article.likes.count %>
-                  <% end %>
-                </p>
-              <% end %>
-            </div>
-
-            <div class="px-1 bd-highlight">
-              <% if @article.user == current_user %>
-                <%= link_to edit_article_path(@article), class: "text-dark" do %>
-                  <%= icon 'fas', 'edit' %>
+          <div class="px-1">
+            <!-- いいね機能 -->
+            <% if @article.liked_by?(current_user) %>
+              <p>
+                <%= link_to article_likes_path(@article), class: "text-white", method: :delete do %>
+                  <%= icon 'far', 'thumbs-up' %> <%= @article.likes.count %>
                 <% end %>
-                <%= link_to article_path(@article), class: "text-danger", method: :delete do %>
-                  <%= icon 'fas', 'trash-alt' %>
+              </p>
+            <% else %>
+              <p>
+                <%= link_to article_likes_path(@article), class: "text-white", method: :post do %>
+                  <%= icon 'far', 'thumbs-up' %> <%= @article.likes.count %>
                 <% end %>
-              <% end %>
-            </div>
-          </header>
-
-          <!-- 動画と画像で表示を分ける-->
-          <% if @article.video? %>
-            <% type = file_type(@article.video.url)%> <!-- app/helpers/application_helper.rbにfile_typeを定義 -->
-              <% if type == 'image' %>
-                <%= image_tag @article.video.url, class:'post-thum' %>
-              <% elsif type == 'video' %>
-                <%= video_tag @article.video.url, autoplay: true, muted: true, controls: true, class:'post-thum' %>
-              <% end %>
-          <% end %>
-
-          <small class="d-flex flex-nowrap">
-            <%= @article.created_at.strftime('%Y/%m/%d') %>
-          </small>
-
-          <h4 class="text-center">
-            <%= @article.title %>
-          </h4>
-
-          <h6 class="text-center">
-            <%= @article.body %>
-          </h6>
-
-          <h6 class="text-center">
-            <%= render_with_hashtags(@article.caption) %>
-          </h6>
-
-          <div class="text-center m-2">
-            <% @article.article_comments.each do |article_comment| %>
-              <div class="border-bottom m-1">
-                <strong><%= article_comment.user.name %></strong>
-
-                <%= article_comment.comment %>
-                
-                <small><%= article_comment.created_at.strftime('%Y/%m/%d') %></small>
-
-                <% if article_comment.user == current_user %>
-                  <%= link_to "削除", article_article_comments_path(article_comment.article, article_comment), class: "text-danger", method: :delete %>
-                <% end %>
-              </div>
-            <% end %>
-
-            <%= form_with(model:[@article, @article_comment], local: true) do |f| %>
-              <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
-              <%= f.submit "送信する" %>
+              </p>
             <% end %>
           </div>
-        </section>
-      </article>
-    </div>
 
-  </section>
+          <div class="px-1 bd-highlight">
+            <% if @article.user == current_user %>
+              <%= link_to edit_article_path(@article), class: "text-white" do %>
+                <%= icon 'fas', 'edit' %>
+              <% end %>
+              <%= link_to article_path(@article), class: "text-danger", method: :delete do %>
+                <%= icon 'fas', 'trash-alt' %>
+              <% end %>
+            <% end %>
+          </div>
+        </header>
+
+        <!-- 動画と画像で表示を分ける-->
+        <% if @article.video? %>
+          <% type = file_type(@article.video.url)%> <!-- app/helpers/application_helper.rbにfile_typeを定義 -->
+            <% if type == 'image' %>
+              <%= image_tag @article.video.url, class:'post-thum' %>
+            <% elsif type == 'video' %>
+              <%= video_tag @article.video.url, autoplay: true, muted: true, controls: true, class:'post-thum' %>
+            <% end %>
+        <% end %>
+
+        <small class="d-flex flex-nowrap">
+          <%= @article.created_at.strftime('%Y/%m/%d') %>
+        </small>
+
+        <h4 class="text-center">
+          <%= @article.title %>
+        </h4>
+
+        <h6 class="text-center">
+          <%= @article.body %>
+        </h6>
+
+        <h6 class="text-center">
+          <%= render_with_hashtags(@article.caption) %>
+        </h6>
+
+        <div class="text-center m-2">
+          <% @article.article_comments.each do |article_comment| %>
+            <div class="border-bottom m-1">
+              <strong><%= article_comment.user.name %></strong>
+
+              <%= article_comment.comment %>
+
+              <small><%= article_comment.created_at.strftime('%Y/%m/%d') %></small>
+
+              <% if article_comment.user == current_user %>
+                <%= link_to "削除", article_article_comments_path(article_comment.article, article_comment), class: "text-danger", method: :delete %>
+              <% end %>
+            </div>
+          <% end %>
+
+          <%= form_with(model:[@article, @article_comment], local: true) do |f| %>
+            <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+            <%= f.submit "送信する" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 

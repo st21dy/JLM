@@ -1,10 +1,13 @@
-<div class="mx-sm-2 mx-md-3 mx-lg-5 mb-3 pt-2 pb-5">
-  <div class="m-1">
-
+<div id="new">
+  <div class="container">
+    <div class="text-center text-white">
+      
+    <%= image_tag 'logo-cutout.png', class: "img-fluid" %>
+    
     <header class="text-center">
       <h3>NEW POST</h3>
     </header>
-
+    
     <!--error_form-->
     <%= render 'layouts/error_form', error: @article %>
     <!--error_form-->
@@ -32,7 +35,7 @@
       <% end %>
 
     </div>
-
+    </div>
   </div>
 </div>
 

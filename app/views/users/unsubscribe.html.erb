@@ -1,18 +1,24 @@
-<div class="mx-sm-2 mx-md-3 mx-lg-5 mb-3 pt-2 pb-5">
-  <section class="text-center px-2">
+<div id="unsubscribe">
+  <%= image_tag 'logo-cutout.png', class: "img-fluid d-block mx-auto" %>
+  
+  <div class="unsubscribe text-center text-white">
     <h3>本当に退会しますか？</h3>
     <p>
       退会するとログインできなくなりますが、会員登録情報やこれまでの投稿は残ります。<br>
       投稿を残したくない場合は、退会前に削除することをお勧めします。<br>
-      退会する場合は、「<a class="text-danger">退会する</a>」をクリックしてください。
+      退会する場合は、「<strong class="text-danger">退会する</strong>」をクリックしてください。
     </p>
     <ul class="nav justify-content-center">
-      <li class="nav-item shadow border m-1">
-        <%= link_to "退会しない", root_path, class: "text-dark" %>
+      <li class="nav-item shadow m-2 p-2">
+        <h4>
+          <%= link_to "退会しない", root_path, class: "text-white" %>
+        </h4>
       </li>
-      <li class="nav-item shadow border m-1">
-         <%= link_to "退会する", withdraw_users_path, class: "text-danger", method: :PATCH, data: {confirm: "本当に退会してもよろしいですか？"} %>
+      <li class="nav-item shadow m-2 p-2">
+        <h4>
+          <%= link_to "退会する", withdraw_users_path, class: "text-danger", method: :PATCH, data: {confirm: "本当に退会してもよろしいですか？"} %>
+        </h4>
       </li>
     </ul>
-  </section>
+  </div>
 </div>

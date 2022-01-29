@@ -1,89 +1,84 @@
-<div class="mx-sm-2 mx-md-3 mx-lg-5 mb-3 pt-2 pb-5">
-  <div class="main">
-    <article>
-
-      <header>
-        <div class="text-center">
-          <%= attachment_image_tag @user, :icon, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'100x100', class: "border border-dark rounded-circle" %>
-        </div>
-        <h1 class="name text-center">
-          <strong><%= @user.name %></strong>
-        </h1>
-        <p class="body text-center">
-          <%= @user.body %>
-        </p>
-
-        <ul class="nav justify-content-center">
+<div id="usershow">
+  <div class="usershow">
+    
+    <header class="text-white">
+      <div class="text-center">
+        <%= attachment_image_tag @user, :icon, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'100x100', class: "border border-dark rounded-circle" %>
+      </div>
+      <h1 class="name text-center">
+        <strong><%= @user.name %></strong>
+      </h1>
+      <p class="body text-center">
+        <%= @user.body %>
+      </p>
+      
+      <ul class="nav justify-content-center">
+        <li class="nav-item shadow border m-1">
+          <%= link_to follows_user_path(@user), class: "nav-link text-white" do %>
+            <%= icon 'fas', 'user-circle' %>
+          <% end %>
+        </li>
+        <li class="nav-item shadow border m-1">
+          <%= link_to followers_user_path(@user), class: "nav-link text-white" do %>
+            <%= icon 'far', 'user-circle' %>
+          <% end %>
+        </li>
+        
+        <!--ログインしていないユーザーのみ表示-->
+        <% if current_user != @user %>
           <li class="nav-item shadow border m-1">
-            <%= link_to follows_user_path(@user), class: "nav-link text-dark" do %>
-              <%= icon 'fas', 'user-circle' %>
-            <% end %>
-          </li>
-          <li class="nav-item shadow border m-1">
-            <%= link_to followers_user_path(@user), class: "nav-link text-dark" do %>
-              <%= icon 'far', 'user-circle' %>
-            <% end %>
-          </li>
-
-          <!--ログインしていないユーザーのみ表示-->
-          <% if current_user != @user %>
-            <li class="nav-item shadow border m-1">
-              <button type="button" class="btn btn-white text-center shadow">
-                <% if current_user.following?(@user) %>
-                  <%= link_to user_follows_path(@user.id), class: "text-danger", method: :delete do %>
-                    <%= icon 'fas', 'user-minus' %>
-                  <% end %>
-                <% else %>
-                  <%= link_to  user_follows_path(@user.id), class: "text-blue", method: :POST do %>
-                    <%= icon 'fas', 'user-plus' %>
-                  <% end %>
+            <button type="button" class="btn btn-white text-center shadow">
+              <% if current_user.following?(@user) %>
+                <%= link_to user_follows_path(@user.id), class: "text-danger", method: :delete do %>
+                  <%= icon 'fas', 'user-minus' %>
                 <% end %>
-              </button>
-            </li>
-          <% end %>
-
-          <!--ログインしているユーザーのみ表示-->
-          <% if @user.id == current_user.id %>
-            <li class="nav-item shadow border m-1">
-              <%= link_to likes_user_path(@user), class: "nav-link text-dark" do %>
-                <%= icon 'far', 'thumbs-up' %>
+              <% else %>
+                <%= link_to  user_follows_path(@user.id), class: "text-blue", method: :POST do %>
+                  <%= icon 'fas', 'user-plus' %>
+                <% end %>
               <% end %>
-            </li>
-            <li class="nav-item shadow border m-1">
-              <%= link_to edit_user_path(@user), class: "nav-link text-dark" do %>
-                <%= icon 'fas', 'user-edit' %>
-              <% end %>
-            </li>
-            <li class="nav-item shadow border m-1">
-              <%= link_to destroy_user_session_path, method: :delete, class: "nav-link text-dark" do %>
-                <%= icon 'fas', 'sign-out-alt' %>
-              <% end %>
-            </li>
-          <% end %>
-        </ul>
-      </header>
-
-    </article>
-  </div>
-
-  <div>
-    <article class="d-flex flex-wrap justify-content-center">
-      <% @user.articles.each do |article| %>
-      <section class="card m-1">
-        <%= link_to article_path(article.id) do %>
-          <!-- 動画と画像で表示を分ける-->
-          <% if article.video? %>
-            <% type = file_type(article.video.url)%> <!-- app/helpers/application_helper.rbにfile_typeを定義 -->
-              <% if type == 'image' %>
-                <%= image_tag article.video.url, class:'post-thum' %>
-              <% elsif type == 'video' %>
-                <%= video_tag article.video.url, autoplay: true, muted: true, controls: true, class:'post-thum' %>
-              <% end %>
-          <% end %>
+            </button>
+          </li>
         <% end %>
-
-      </section>
-      <% end %>
-    </article>
+        
+        <!--ログインしているユーザーのみ表示-->
+        <% if @user.id == current_user.id %>
+          <li class="nav-item shadow border m-1">
+            <%= link_to likes_user_path(@user), class: "nav-link text-white" do %>
+              <%= icon 'far', 'thumbs-up' %>
+            <% end %>
+          </li>
+          <li class="nav-item shadow border m-1">
+            <%= link_to edit_user_path(@user), class: "nav-link text-white" do %>
+              <%= icon 'fas', 'user-edit' %>
+            <% end %>
+          </li>
+          <li class="nav-item shadow border m-1">
+            <%= link_to destroy_user_session_path, method: :delete, class: "nav-link text-white" do %>
+              <%= icon 'fas', 'sign-out-alt' %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </header>
+    
+  <div class="d-flex flex-wrap justify-content-center">
+    <% @user.articles.each do |article| %>
+      <div class="card">
+        <div class="card-image">
+          <%= link_to article_path(article.id) do %>
+            <!-- 動画と画像で表示を分ける-->
+            <% if article.video? %>
+              <% type = file_type(article.video.url)%> <!-- app/helpers/application_helper.rbにfile_typeを定義 -->
+                <% if type == 'image' %>
+                  <%= image_tag article.video.url, class:'post-thum' %>
+                <% elsif type == 'video' %>
+                  <%= video_tag article.video.url, autoplay: true, muted: true, controls: true, class:'post-thum' %>
+                <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
